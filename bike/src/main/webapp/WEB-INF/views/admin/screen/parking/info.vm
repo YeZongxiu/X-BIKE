@@ -1,0 +1,27 @@
+<style type="text/css">
+    body, html,#allmap {width: 100%;height: 100%;overflow: hidden;margin:0;font-family:"微软雅黑";}
+</style>
+<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=nry1ogpPPBHyTnftGh5mng8fbsCmV7v2"></script>
+<script src="/admin/js/jquery.min.js"></script>
+<body>
+<div id="allmap"></div>
+</body>
+</html>
+<script type="text/javascript">
+    // 百度地图API功能
+    var map = new BMap.Map("allmap");
+    #if($!result.ret_code == 1)
+        alert('$result.ret_info');
+        map.centerAndZoom("杭州", 15);
+    #else
+        #set($count = 0)
+        #foreach($park in $result.parking_list)
+            var p$count = new BMap.Point($park.longitude,$park.latitude);
+            var marker$count = new BMap.Marker(p$count);
+            map.addOverlay(marker$count);
+            #set($count = $count + 1)
+        #end
+    #end
+    map.centerAndZoom(p0, 15);
+    map.enableScrollWheelZoom(true);     //开启鼠标滚轮缩放
+</script>

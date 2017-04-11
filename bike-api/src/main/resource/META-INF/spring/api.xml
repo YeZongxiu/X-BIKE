@@ -32,6 +32,7 @@
 	<bean id="userScanInfoApi" class="com.ucmed.common.api.bike.UserScanInfoApi" />
 	<bean id="getBikeFixParkingApi" class="com.ucmed.common.api.fix.GetBikeFixParkingApi" />
 	<bean id="changeBikeFixStatusApi" class="com.ucmed.common.api.fix.ChangeBikeFixStatusApi" />
+	<bean id="adminGetParkInfoApi" class="com.ucmed.common.api.admin.AdminGetParkInfoApi" />
 	
 	<bean id="apiFactory" class="com.ucmed.common.api.ApiFactoryImpl">
 		<property name="map">
@@ -58,6 +59,7 @@
 				<entry key="api.bike.user.scan.info" value-ref="userScanInfoApi"/>
 				<entry key="api.bike.admin.get.fix" value-ref="getBikeFixParkingApi"/>
 				<entry key="api.bike.admin.change.fix.status" value-ref="changeBikeFixStatusApi"/>
+				<entry key="api.bike.admin.get.park" value-ref="adminGetParkInfoApi"/>
 			</map>
 		</property>
 	</bean>

@@ -127,4 +127,17 @@ public class ParkingSpaceServiceImpl implements ParkingSpaceService {
 		parkingSpaceMapper.deleteByPrimaryKey(parkId);
 	}
 
+	@Override
+	public List<ParkingSpaceModel> selectAllPrak() {
+		List<ParkingSpace> list = parkingSpaceMapper.selectAllPrak();
+		if (null == list || list.isEmpty()) {
+			return new ArrayList<ParkingSpaceModel>();
+		}
+		List<ParkingSpaceModel> models = new ArrayList<>();
+		for (ParkingSpace parkingSpace : list) {
+			models.add(ModelDataObjectUtil.model2do(parkingSpace, ParkingSpaceModel.class));
+		}
+		return models;
+	}
+
 }

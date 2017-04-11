@@ -4,7 +4,7 @@
 		 version="3.0" metadata-complete="true">
 	<error-page>
 		<error-code>404</error-code>
-		<location>/admin/error.htm</location>
+		<location>/login/index.htm</location>
 	</error-page>
 	<session-config>
 		<session-timeout>30</session-timeout>

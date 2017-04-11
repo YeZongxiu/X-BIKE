@@ -1,6 +1,7 @@
 package com.ucmed.common.controller.admin.success;
 
 import com.ucmed.common.model.user.UserModel;
+import com.ucmed.common.net.XBIKE;
 import com.ucmed.common.service.user.UserService;
 import com.ucmed.common.util.ResultUtil;
 import com.ucmed.common.util.StringUtil;
@@ -18,8 +19,14 @@ import java.util.Date;
 @Controller
 @RequestMapping("/admin")
 public class AdminController {
-    @RequestMapping(method = RequestMethod.GET, value = "menu.htm")
+    @RequestMapping(method = RequestMethod.GET, value = "getParkInfo.htm")
     public String menu(HttpServletRequest request, ModelMap map) {
-        return "admin/layout/menu";
+        JSONObject result = new JSONObject();
+        String apiName = "api.bike.admin.get.park";
+        JSONObject params = new JSONObject();
+        String session_id = (String) request.getSession().getAttribute("session_id");
+        result = XBIKE.getInstance().requestActionParams(apiName, params, session_id).optJSONObject("return_params");
+        map.put("result", result);
+        return "admin/screen/parking/info";
     }
 }

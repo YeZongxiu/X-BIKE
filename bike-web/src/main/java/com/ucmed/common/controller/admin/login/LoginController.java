@@ -51,7 +51,12 @@ public class LoginController {
         JSONObject params = new JSONObject();
         params.put("phone", username);
         params.put("password", password);
-        ResultUtil.writeResult(response, (XBIKE.getInstance().requestActionParams(apiName, params, null)).toString());
+        result = XBIKE.getInstance().requestActionParams(apiName, params, null).optJSONObject("return_params");
+        if (result.optInt("ret_code") == 0){
+            request.getSession().setAttribute("pt_admin", result);
+            request.getSession().setAttribute("session_id", result.optString("session_id"));
+        }
+        ResultUtil.writeResult(response, result.toString());
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "super.htm")

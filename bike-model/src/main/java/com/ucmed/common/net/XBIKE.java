@@ -54,6 +54,7 @@ public class XBIKE {
 			JSONObject request = new JSONObject();
 			request.put(Constants.PARAMS, params);
 			request.put(Constants.API_NAME, apiName);
+			request.put(Constants.API_PARAMS_SESSION_ID, sessionId);
 			res = request(request);
 		} catch (Exception e) {
 			log.info(e);

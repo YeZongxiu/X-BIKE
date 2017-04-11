@@ -116,4 +116,17 @@ public interface ParkingSpaceMapper {
     })
     ParkingSpace getSameParking(@Param("longitude") String longitude, @Param("latitude") String latitude);
 
+    @Select({
+            "select",
+            "id, bike_number, longitude, latitude, park_number",
+            "from parking_space"})
+    @Results({
+            @Result(column="id", property="id", jdbcType=JdbcType.DECIMAL, id=true),
+            @Result(column="longitude", property="longitude", jdbcType=JdbcType.VARCHAR),
+            @Result(column="latitude", property="latitude", jdbcType=JdbcType.VARCHAR),
+            @Result(column="bike_number", property="bikeNumber", jdbcType=JdbcType.DECIMAL),
+            @Result(column="park_number", property="parkNumber", jdbcType=JdbcType.DECIMAL)
+    })
+    List<ParkingSpace> selectAllPrak();
+
 }

@@ -25,6 +25,7 @@
 				<value type="java.lang.String">/login/index.htm</value>
 				<value type="java.lang.String">/login/checkPassword.htm</value>
 				<value type="java.lang.String">/admin/result.htm</value>
+				<value type="java.lang.String">/</value>
 			</list>
 		</property>
 	</bean>

@@ -53,6 +53,7 @@
                 <value>api.bike.delete.parking</value>
                 <value>api.bike.use.list</value>
                 <value>api.bike.user.scan.info</value>
+                <value>api.bike.admin.get.park</value>
             </list>
         </property>
     </bean>

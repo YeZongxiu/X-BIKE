@@ -22,4 +22,6 @@ public interface ParkingSpaceService {
     
     public void deletePark(Long parkId);
 
+    public List<ParkingSpaceModel> selectAllPrak();
+
 }

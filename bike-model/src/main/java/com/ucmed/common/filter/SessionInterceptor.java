@@ -44,7 +44,7 @@ public class SessionInterceptor extends HandlerInterceptorAdapter {
                 temp = tempPath[1];
             if(!isPass && !"api".equals(temp)) {
                 if(null == request.getSession().getAttribute("pt_admin")) {
-                    ResultUtil.sendMessageToResultPage(response, true, "/login/index.htm");
+                    response.sendRedirect("/login/index.htm");
                     return false;
                 }
             }
