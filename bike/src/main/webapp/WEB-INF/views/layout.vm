@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<link rel="icon" href="http://www.ucmed.cn/favicon.ico" type="image/x-icon" />
+<link rel="shortcut icon" href="http://www.ucmed.cn/favicon.ico" type="image/x-icon" />
+<link rel="shortcut icon" type="image/x-icon"	href="http://www.ucmed.cn/favicon.ico" />
+<title>#if($mainTitle) $!mainTitle #else bike #end</title>
+</head>
+
+$screen_content
+$!extraJavaScript
+
+</html>

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+	   xmlns:context="http://www.springframework.org/schema/context"
+	   xmlns:aop="http://www.springframework.org/schema/aop"
+	   xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context-3.0.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd"
+	   default-autowire="byName">
+
+	<bean id="commonUrl" class="com.ucmed.common.config.CommonUrl">
+		<property name="commonUrl" value="${common.url}"></property>
+		<property name="imagePrefix" value="${image.prefix}"></property>
+		<property name="videoPrefix" value="${video.prefix}"></property>
+		<property name="imageUploadUrl" value="${imageUpload.url}"></property>
+		<property name="videoUploadUrl" value="${videoUpload.url}"></property>
+	</bean>
+
+	<!-- 省市管理 -->
+	<bean id="locationUtil" class="com.ucmed.common.util.LocationUtil"/>
+
+	<bean id="apiFlowJnlService" class="com.ucmed.common.service.api.ApiFlowJnlServiceImpl" />
+	<bean id="bikeService" class="com.ucmed.common.service.bike.BikeServiceImpl" />
+	<bean id="bikeTypeService" class="com.ucmed.common.service.bike.BikeTypeServiceImpl" />
+	<bean id="fixOrderService" class="com.ucmed.common.service.fix.FixOrderServiceImpl" />
+	<bean id="problemService" class="com.ucmed.common.service.fix.ProblemServiceImpl" />
+	<bean id="parkingSpaceService" class="com.ucmed.common.service.parking.ParkingSpaceServiceImpl" />
+	<bean id="recordService" class="com.ucmed.common.service.record.RecordServiceImpl" />
+	<bean id="userService" class="com.ucmed.common.service.user.UserServiceImpl" />
+	<bean id="userSessionService" class="com.ucmed.common.service.user.UserSessionServiceImpl" />
+</beans>

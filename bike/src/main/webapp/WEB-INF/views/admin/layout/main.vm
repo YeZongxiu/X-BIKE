@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link href="/admin/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/admin/css/font-awesome.min.css" rel="stylesheet">
+    <link href="/admin/css/nprogress.css" rel="stylesheet">
+    <link href="/admin/css/green.css" rel="stylesheet">
+    <link href="/admin/css/bootstrap-progressbar-3.3.4.min.css" rel="stylesheet">
+    <link href="/admin/css/jqvmap.min.css" rel="stylesheet">
+    <link href="/admin/css/daterangepicker.css" rel="stylesheet">
+    <link href="/admin/css/animate.min.css" rel="stylesheet">
+    <link href="/admin/css/custom.min.css" rel="stylesheet">
+    <script src="/admin/js/jquery.min.js"></script>
+    <title id="title-header">x-bike</title>
+
+</head>
+<body style=" background-repeat: no-repeat;"><a href="#" id="totop" name="totop" accesskey="0"></a>
+<div>
+    <div class='pageall'>
+        <div id="user_nav">
+            $screen_content
+        </div>
+    </div>
+</div>
+<script src="/admin/js/bootstrap.min.js"></script>
+<script src="/admin/js/fastclick.js"></script>
+<script src="/admin/js/nprogress.js"></script>
+<script src="/admin/js/Chart.min.js"></script>
+<script src="/admin/js/gauge.min.js"></script>
+<script src="/admin/js/bootstrap-progressbar.min.js"></script>
+<script src="/admin/js/icheck.min.js"></script>
+<script src="/admin/js/skycons.js"></script>
+<script src="/admin/js/jquery.flot.js"></script>
+<script src="/admin/js/jquery.flot.pie.js"></script>
+<script src="/admin/js/jquery.flot.time.js"></script>
+<script src="/admin/js/jquery.flot.stack.js"></script>
+<script src="/admin/js/jquery.flot.resize.js"></script>
+<script src="/admin/js/jquery.flot.orderBars.js"></script>
+<script src="/admin/js/jquery.flot.spline.min.js"></script>
+<script src="/admin/js/curvedLines.js"></script>
+<script src="/admin/js/date.js"></script>
+<script src="/admin/js/jquery.vmap.js"></script>
+<script src="/admin/js/jquery.vmap.world.js"></script>
+<script src="/admin/js/jquery.vmap.sampledata.js"></script>
+<script src="/admin/js/moment.min.js"></script>
+<script src="/admin/js/daterangepicker.js"></script>
+<script src="/admin/js/custom.min.js"></script>
+</body>
+</html>

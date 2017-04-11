@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="UTF-8" />
+    <title>X-BIKE</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="/admin/css/login.css" />
+    <script type="text/javascript" src="/admin/js/login.js"></script>
+    <script type="text/javascript" src="/admin/js/jquery-3.1.1.js"></script>
+</head>
+<body>
+<div class="container">
+
+    <header>
+        <h1>X-BIKE</h1>
+        <nav class="codrops-demos">
+
+        </nav>
+    </header>
+    <section>
+        <div id="container_demo" >
+            <a class="hiddenanchor" id="toregister"></a>
+            <a class="hiddenanchor" id="tologin"></a>
+            <div id="wrapper">
+                <div id="login" class="animate form">
+                    <form  action="" method="post">
+                        <h1>Log in</h1>
+                        <p>
+                            <label for="username" class="uname" data-icon="u" > Your username </label>
+                            <input id="username" name="username" required="required" type="text" placeholder="myusername"/>
+                        </p>
+                        <p>
+                            <label for="password" class="youpasswd" data-icon="p"> Your password </label>
+                            <input id="password" name="password" required="required" type="password" placeholder="mypassword" />
+                        </p>
+                        <p class="login button">
+                            <input type="button" value="Login" onclick="checkPassword();" />
+                        </p>
+                        <p class="change_link">
+                            X-BIKE 团队
+                        </p>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </section>
+</div>
+</body>
+</html>

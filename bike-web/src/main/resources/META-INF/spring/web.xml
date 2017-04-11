@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="
+        http://www.springframework.org/schema/beans 
+        http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+        http://www.springframework.org/schema/context 
+        http://www.springframework.org/schema/context/spring-context-3.0.xsd"
+	default-autowire="byName">
+	<bean id="tileTool" class="org.jpxx.sense.tiles.TileTool" />
+	<bean id="stringEscapeUtils" class="org.apache.commons.lang.StringEscapeUtils" />
+	<bean id="urlCodec" class="org.apache.commons.codec.net.URLCodec"/>
+	<bean id="base64Util" class="com.ucmed.common.util.Base64Util" />
+
+	<!-- Velocity config -->
+	<bean id="velocityConfigurer"
+		class="org.springframework.web.servlet.view.velocity.VelocityConfigurer" lazy-init="true">
+		<property name="resourceLoaderPath">
+			<value>/WEB-INF/views/</value>
+		</property>
+		<property name="velocityProperties">
+			<props>
+				<prop key="input.encoding">UTF-8</prop>
+				<prop key="output.encoding">UTF-8</prop>
+				<prop key="file.resource.loader.cache">true</prop>
+				<prop key="velocimacro.library.autoreload">false</prop>
+			</props>
+		</property>
+	</bean>
+
+	<!-- [viewResolver] -->
+	<bean id="velocityViewResolver"
+		class="org.jpxx.sense.servlet.view.velocity.SenseVelocityViewResolver" />
+
+	<!-- Velocity config end -->
+
+	<!-- save spring application context -->
+	<bean class="com.ucmed.common.util.ApplicationContextUtil" />
+
+	<bean id="multipartResolver"
+		class="org.springframework.web.multipart.commons.CommonsMultipartResolver"
+		p:defaultEncoding="utf-8" />
+		
+	<bean id="toolBox" class="org.jpxx.sense.servlet.view.velocity.tools.ToolBoxImpl" >
+		<property name="toolBoxMap">
+			<map>
+				<entry key="escapeUtils" value-ref="stringEscapeUtils" />
+				<entry key="urlCodec" value-ref="urlCodec" />
+				<entry key="base64Util" value-ref="base64Util" />
+				<entry key="sysUtil">
+					<bean class="com.ucmed.common.util.SysUtil" />
+				</entry>
+			</map>
+		</property>
+	</bean>
+	<bean class="com.ucmed.common.util.ApplicationContextUtil" />
+</beans>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<meta content="telephone=no" name="format-detection"/>
+<!DOCTYPE html PUBLIC "-//WAPFORUM//DTD XHTML Mobile 1.0//EN" "http://www.wapforum.org/DTD/xhtml-mobile10.dtd" >
+<html lang="en" xml:lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<meta content="telephone=no" name="format-detection">
+<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1, user-scalable=no" />
+<head>
+
+    <title id="title-header">x-bike</title>
+    <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=nry1ogpPPBHyTnftGh5mng8fbsCmV7v2"></script>
+    <script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+    <script type="text/javascript" src="/admin/js/jquery-3.1.1.js"></script>
+    <script>
+        wx.config({
+            debug: false, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
+            appId: '$config.appId', // 必填，企业号的唯一标识，此处填写企业号corpid
+            timestamp: parseInt($config.timestamp,10), // 必填，生成签名的时间戳
+            nonceStr: '$config.nonceStr', // 必填，生成签名的随机串
+            signature: '$config.signature',// 必填，签名，见附录1
+            jsApiList: ['openLocation'] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
+        });
+    </script>
+    <link rel="stylesheet" href="/admin/css/weui.min.css">
+    <link rel="stylesheet" href="/admin/css/jquery-weui.css">
+</head>
+<body style=" background-repeat: no-repeat;"><a href="#" id="totop" name="totop" accesskey="0"></a>
+<div>
+    <div class='pageall'>
+        <div id="user_nav">
+            $screen_content
+        </div>
+    </div>
+</div>
+<script src="/admin/js/jquery-weui.js"></script>
+</body>
+</html>

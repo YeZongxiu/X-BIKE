@@ -1,0 +1,101 @@
+#set( $layout = "/wechat/layout/main.vm")
+<style type="text/css">
+    body, html, #allmap {
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        margin: 0;
+        font-family: "微软雅黑";
+    }
+</style>
+<body>
+<div id="allmap"></div>
+</body>
+<script type="text/javascript">
+    // 百度地图API功能
+    var map = new BMap.Map("allmap");
+    var start = new BMap.Point($result.longitude,$result.latitude);
+    var startPoint;
+    var endPoint;
+    map.centerAndZoom(start, 15);
+        #if($result.ret_code == 1)
+        $.alert("$result.ret_info", function () {
+            WeixinJSBridge.call('closeWindow');
+        });
+        #end
+    var end = new BMap.Point($result.fix_info.longitude,$result.fix_info.latitude);
+    var driving = new BMap.DrivingRoute(map, {
+        renderOptions: {map: map, autoViewport: true},
+        onPolylinesSet: function (routes) {
+            searchRoute = routes[0].getPolyline();//导航路线
+            map.addOverlay(searchRoute);
+        },
+        onMarkersSet: function (routes) {
+            map.removeOverlay(routes[0].marker); //删除起点
+            startPoint = new BMap.Marker(routes[0].marker.getPosition(), {icon: routes[0].marker.getIcon()});
+            map.removeOverlay(routes[1].marker);//删除终点
+            endPoint = new BMap.Marker(routes[1].marker.getPosition(), {icon: routes[1].marker.getIcon()});
+            endPoint.addEventListener("click", status);
+            function status() {
+                $.actions({
+                    actions: [{
+                        text: "取到报修车辆",
+                        onClick: function () {
+                            $.confirm("已取到车辆", function () {
+                                changeStatus('3');
+                            }, function () {
+
+                            });
+                        }
+                    }, {
+                        text: "未找到报修车辆",
+                        onClick: function () {
+                            $.confirm("未找到车辆", function () {
+                                changeStatus('2');
+                            }, function () {
+
+                            });
+                        }
+                    }, {
+                        text: "报修车辆未发现故障",
+                        onClick: function () {
+                            $.confirm("车辆未发现故障", function () {
+                                changeStatus('4');
+                            }, function () {
+
+                            });
+                        }
+                    }, {
+                        text: "查看车辆信息",
+                        onClick: function () {
+                            $.alert({
+                                title: '车辆信息',
+                                text: '#if($result.fix_info.bikeTypeName && "" !=$result.fix_info.bikeTypeName)<div>车辆品牌：$result.fix_info.bikeTypeName </div>#end #if($result.fix_info.bikeNo && "" !=$result.fix_info.bikeNo)<div>车牌号：$result.fix_info.bikeNo</div>#end #if($result.fix_info.problem && "" !=$result.fix_info.problem)<div>问题：$result.fix_info.problem</div>#end #if($result.fix_info.remark && "" !=$result.fix_info.remark)<div>备注：$result.fix_info.remark</div>#end #if($result.fix_info.photo && "" !=$result.fix_info.photo)<div>照片：<img src="$result.fix_info.photo"/></div>#end'
+                            });
+                        }
+                    }]
+                });
+            }
+
+            map.addOverlay(startPoint);
+            map.addOverlay(endPoint);
+            $.alert({
+                title: '车辆信息',
+                text: '#if($result.fix_info.bikeTypeName && "" !=$result.fix_info.bikeTypeName)<div>车辆品牌：$result.fix_info.bikeTypeName </div>#end #if($result.fix_info.bikeNo && "" !=$result.fix_info.bikeNo)<div>车牌号：$result.fix_info.bikeNo</div>#end #if($result.fix_info.problem && "" !=$result.fix_info.problem)<div>问题：$result.fix_info.problem</div>#end #if($result.fix_info.remark && "" !=$result.fix_info.remark)<div>备注：$result.fix_info.remark</div>#end #if($result.fix_info.photo && "" !=$result.fix_info.photo)<div>照片：<img src="$result.fix_info.photo"/></div>#end'
+            });
+        }
+    });
+    driving.search(start, end);
+    map.enableScrollWheelZoom(true);     //开启鼠标滚轮缩放
+    function changeStatus(status) {
+        $.post("/admin/parking.htm?action=changeStatus", {
+            id: '$result.fix_info.id',
+            status: status
+        }, function (e) {
+            var result = eval("(" + e + ")");
+            if (result.ret_code == 0) {
+                window.location.href = "/wechat/parking.htm?action=getFixBike&change=false&longitude=" + $result.fix_info.longitude +"&latitude=" + $result.fix_info.latitude;
+            }
+        });
+    }
+</script>

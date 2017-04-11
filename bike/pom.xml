@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+      <groupId>com.bike</groupId>
+      <artifactId>x_bike</artifactId>
+      <version>0.0.1</version>
+  </parent>
+  <artifactId>bike</artifactId>
+  <packaging>war</packaging>
+  <name>bike Maven Webapp</name>
+  <properties>
+  	<zk.client.version>0.1</zk.client.version>
+  	<zookeeper.version>3.4.8</zookeeper.version>
+  </properties>
+  <dependencies>
+    <dependency>
+      <groupId>com.bike</groupId>
+      <artifactId>bike-model</artifactId>
+      <version>${project.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>com.bike</groupId>
+      <artifactId>bike-web</artifactId>
+      <version>${project.version}</version>
+    </dependency>
+  </dependencies>
+</project>

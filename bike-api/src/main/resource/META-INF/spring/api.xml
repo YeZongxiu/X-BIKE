@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="
+        http://www.springframework.org/schema/beans 
+        http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+        http://www.springframework.org/schema/context 
+        http://www.springframework.org/schema/context/spring-context-3.0.xsd"
+	default-autowire="byName">
+
+	<bean id="sendValidateMsgApi" class="com.ucmed.common.api.user.SendValidateMsgApi" />
+	<bean id="userRegistApi" class="com.ucmed.common.api.user.UserRegistApi" />
+	<bean id="userLoginApi" class="com.ucmed.common.api.user.UserLoginApi" />
+	<bean id="forgetMsgApi" class="com.ucmed.common.api.user.ForgetMsgApi" />
+	<bean id="vlidateForgetMsgApi" class="com.ucmed.common.api.user.VlidateForgetMsgApi" />
+	<bean id="userWallerApi" class="com.ucmed.common.api.user.UserWallerApi" />
+	<bean id="userSetPhotoApi" class="com.ucmed.common.api.user.UserSetPhotoApi" />
+	<bean id="userLoginOutApi" class="com.ucmed.common.api.user.UserLoginOutApi" />
+	<bean id="adminAddBikeApi" class="com.ucmed.common.api.admin.AdminAddBikeApi" />
+	<bean id="getBikeTypeApi" class="com.ucmed.common.api.bike.GetBikeTypeApi" />
+	<bean id="getBikeProblemApi" class="com.ucmed.common.api.fix.GetBikeProblemApi" />
+	<bean id="bikeAddFixApi" class="com.ucmed.common.api.fix.BikeAddFixApi" />
+	<bean id="getParkingBikeApi" class="com.ucmed.common.api.bike.GetParkingBikeApi" />
+	<bean id="adminAddParkingApi" class="com.ucmed.common.api.admin.AdminAddParkingApi" />
+	<bean id="scanUseBikeApi" class="com.ucmed.common.api.bike.ScanUseBikeApi" />
+	<bean id="returnUseBikeApi" class="com.ucmed.common.api.bike.ReturnUseBikeApi" />
+	<bean id="adminDeleteBikeApi" class="com.ucmed.common.api.admin.AdminDeleteBikeApi" />
+	<bean id="adminDeleteParkingApi" class="com.ucmed.common.api.admin.AdminDeleteParkingApi" />
+	<bean id="userBikeUseListApi" class="com.ucmed.common.api.user.UserBikeUseListApi" />
+	<bean id="userScanInfoApi" class="com.ucmed.common.api.bike.UserScanInfoApi" />
+	<bean id="getBikeFixParkingApi" class="com.ucmed.common.api.fix.GetBikeFixParkingApi" />
+	<bean id="changeBikeFixStatusApi" class="com.ucmed.common.api.fix.ChangeBikeFixStatusApi" />
+	
+	<bean id="apiFactory" class="com.ucmed.common.api.ApiFactoryImpl">
+		<property name="map">
+			<map>
+				<entry key="api.bike.user.validate.msg" value-ref="sendValidateMsgApi" />
+				<entry key="api.bike.user.regist" value-ref="userRegistApi" />
+				<entry key="api.bike.user.login" value-ref="userLoginApi"/>
+				<entry key="api.bike.user.forget.msg" value-ref="forgetMsgApi"/>
+				<entry key="api.bike.user.forget.set.password" value-ref="vlidateForgetMsgApi"/>
+				<entry key="api.bike.user.waller" value-ref="userWallerApi"/>
+				<entry key="api.bike.user.set.photo" value-ref="userSetPhotoApi"/>
+				<entry key="api.bike.user.login.out" value-ref="userLoginOutApi"/>
+				<entry key="api.bike.add" value-ref="adminAddBikeApi"/>
+				<entry key="api.bike.get.type" value-ref="getBikeTypeApi"/>
+				<entry key="api.bike.get.problem" value-ref="getBikeProblemApi"/>
+				<entry key="api.bike.add.fix" value-ref="bikeAddFixApi"/>
+				<entry key="api.bike.parking.space" value-ref="getParkingBikeApi"/>
+				<entry key="api.bike.add.parking" value-ref="adminAddParkingApi"/>
+				<entry key="api.bike.scan.use" value-ref="scanUseBikeApi"/>
+				<entry key="api.bike.return" value-ref="returnUseBikeApi"/>
+				<entry key="api.bike.delete" value-ref="adminDeleteBikeApi"/>
+				<entry key="api.bike.delete.parking" value-ref="adminDeleteParkingApi"/>
+				<entry key="api.bike.use.list" value-ref="userBikeUseListApi"/>
+				<entry key="api.bike.user.scan.info" value-ref="userScanInfoApi"/>
+				<entry key="api.bike.admin.get.fix" value-ref="getBikeFixParkingApi"/>
+				<entry key="api.bike.admin.change.fix.status" value-ref="changeBikeFixStatusApi"/>
+			</map>
+		</property>
+	</bean>
+
+	<bean id="validFactory" class="com.ucmed.common.api.valid.ValidFactory">
+		<property name="valids">
+			<map>
+				<entry key="key" value-ref="keyValid"/>
+				<entry key="object" value-ref="objectValid"/>
+				<entry key="array" value-ref="arrayValid"/>
+			</map>
+		</property>
+	</bean>
+
+	<bean id="keyValid" class="com.ucmed.common.api.valid.KeyValid" />
+	<bean id="objectValid" class="com.ucmed.common.api.valid.ObjectValid" />
+	<bean id="arrayValid" class="com.ucmed.common.api.valid.ArrayValid" />
+
+	<bean id="defApiLogger" class="com.ucmed.common.api.logger.DefaultApiLogger" />
+	<bean id="apiLoggerFactory" class="com.ucmed.common.api.logger.ApiLoggerFactory"
+		  init-method="init">
+		<property name="defLogger" ref="defApiLogger" />
+		<property name="basePakages">
+			<array>
+				<value>com.ucmed.common.logger</value>
+			</array>
+		</property>
+		<property name="service" ref="apiFlowJnlService" />
+	</bean>
+
+</beans>

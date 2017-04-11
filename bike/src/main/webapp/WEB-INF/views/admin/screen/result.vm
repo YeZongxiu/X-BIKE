@@ -1,0 +1,53 @@
+#set( $layout = "/admin/layout/main.vm")
+<!--跳转-->
+<script type="text/javascript">
+	var redirectUrl;
+	var __type;
+	doRedirect = function(time, url, type) {
+		if (!url || url == 'null') {
+			return;
+		}
+		redirectUrl = url;
+		__type = type;
+		var i;
+		for (i = time; i > 0; i--) {
+			window.setTimeout("updateRedirectTime(" + (time - i) + ")", i * 1000);
+		}
+	}
+	
+	function updateRedirectTime(time) {
+		document.getElementById("RedirectTime").innerHTML = "<font color=\"red\">" + (time + 1) + " " +result_second+ "</font>";
+		if (time == 0) {
+			if (__type == 0) {
+				window.location.href = redirectUrl;
+			} else {
+				parent.window.location.href = redirectUrl;
+			}
+		}
+	}
+</script>
+
+<div style="width:100%;">
+	<div style="float:left;"><img src='images/goBackNow.gif'/></div>
+	<div style="float:left;padding-top:5px;">
+		<a href="$!returnUrl" style="color:Black;font-size:20px;font-weight:bold;text-decoration:none">立即返回</a>
+	</div>
+	<br/><br/><br/>
+	<div style='width:100%;height:1px;'><img src='images/dot.gif' /></div>
+</div>
+
+<fieldset>
+	<legend style="font-weight:bold; font-size:12px; color:Gray;">处理结果</legend>
+	<div>
+		<ul>
+			<li>操作结果：<font color="red">$!status</font></li>
+			<li>操作说明：<font color="blue">$!memo</font></li>
+			<li>系统将在<span id="RedirectTime"><font color="red">3秒</font></span>后返回工作页面！</li>
+			<li style="padding-top: 8px;">系统版本：<b>$!version</b></li>
+		</ul>
+	</div>
+</fieldset>
+		
+<script type="text/javascript">
+	doRedirect(2,'$!returnUrl',0);
+</script>
