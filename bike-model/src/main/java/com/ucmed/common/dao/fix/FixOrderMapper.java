@@ -108,4 +108,45 @@ public interface FixOrderMapper {
     })
     int updateStatusById(@Param("id") Long id,
                            @Param("status") String status);
+
+    @Select({
+            "select fix_order.id, bike_type_id, bike_no, longitude, latitude, bike_type_name",
+            "from bike_type, fix_order",
+            "where park_id = #{parkId,jdbcType=DECIMAL}",
+            "and bike_type.id = fix_order.bike_type_id"})
+    @Results({
+            @Result(column="id", property="id", jdbcType=JdbcType.DECIMAL, id=true),
+            @Result(column="bike_type_id", property="bikeTypeId", jdbcType=JdbcType.DECIMAL),
+            @Result(column="bike_type_name", property="bikeTypeName", jdbcType=JdbcType.VARCHAR),
+            @Result(column="bike_no", property="bikeNo", jdbcType=JdbcType.VARCHAR),
+            @Result(column="longitude", property="longitude", jdbcType=JdbcType.VARCHAR),
+            @Result(column="latitude", property="latitude", jdbcType=JdbcType.VARCHAR)
+    })
+    List<FixOrder> getFixOrderByPark(Long parkId);
+
+    @Select({
+            "select fix_order.id,longitude,latitude,bike_no,bike_type_name,bike_type_id",
+            "from fix_order",
+            "JOIN bike_type ON fix_order.bike_type_id = bike_type.id",
+            "where (longitude+0) >= #{minlng,jdbcType=DECIMAL}",
+            "and (longitude+0) <= #{maxlng,jdbcType=DECIMAL}",
+            "and (latitude+0) >= #{minlat,jdbcType=DECIMAL}",
+            "and (latitude+0) <= #{maxlat,jdbcType=DECIMAL}",
+            "and status = 0"})
+    @Results({
+            @Result(column="id", property="id", jdbcType=JdbcType.DECIMAL, id=true),
+            @Result(column="bike_type_id", property="bikeTypeId", jdbcType=JdbcType.DECIMAL),
+            @Result(column="bike_type_name", property="bikeTypeName", jdbcType=JdbcType.VARCHAR),
+            @Result(column="bike_no", property="bikeNo", jdbcType=JdbcType.VARCHAR),
+            @Result(column="longitude", property="longitude", jdbcType=JdbcType.VARCHAR),
+            @Result(column="latitude", property="latitude", jdbcType=JdbcType.VARCHAR)
+    })
+    List<FixOrder> selectOutParkFix(@Param("minlng") Double minlng,
+                                  @Param("maxlng") Double maxlng, @Param("minlat") Double minlat,
+                                  @Param("maxlat") Double maxlat);
+
+    @Select({
+            "select count(*) from fix_order",
+            "where park_id = #{parkId,jdbcType=DECIMAL}"})
+    Long getPrakFixCount(Long parkId);
 }

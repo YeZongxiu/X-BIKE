@@ -1,5 +1,12 @@
 package com.ucmed.common.dataobj.fix;
 
+import com.ucmed.common.util.Constants;
+import com.ucmed.common.util.StringUtil;
+import net.sf.json.JSONObject;
+import org.apache.commons.lang.StringUtils;
+
+import java.util.Date;
+
 public class FixOrder {
     private Long id;
 
@@ -20,6 +27,46 @@ public class FixOrder {
     private String problem;
 
     private String bikeTypeName;
+
+    private String status;
+
+    private Long parkId;
+
+    private Date createTime;
+
+    private Date updateTime;
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public Long getParkId() {
+        return parkId;
+    }
+
+    public void setParkId(Long parkId) {
+        this.parkId = parkId;
+    }
+
+    public Date getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
+    }
+
+    public Date getUpdateTime() {
+        return updateTime;
+    }
+
+    public void setUpdateTime(Date updateTime) {
+        this.updateTime = updateTime;
+    }
 
     public String getBikeTypeName() {
         return bikeTypeName;
@@ -99,5 +146,25 @@ public class FixOrder {
 
     public void setTwoBarCodes(String twoBarCodes) {
         this.twoBarCodes = twoBarCodes;
+    }
+
+    public JSONObject getJsonObject(){
+        JSONObject json = new JSONObject();
+        if (StringUtil.isNotBlank(this.id)){
+            json.put("id", this.id);
+        }
+        if (StringUtil.isNotBlank(this.longitude)){
+            json.put("longitude", this.longitude);
+        }
+        if (StringUtil.isNotBlank(this.latitude)){
+            json.put("latitude", this.latitude);
+        }
+        if (StringUtil.isNotBlank(this.bikeTypeName)){
+            json.put("bike_type_name", this.bikeTypeName);
+        }
+        if (StringUtil.isNotBlank(this.bikeNo)){
+            json.put("bike_no", this.bikeNo);
+        }
+        return  json;
     }
 }

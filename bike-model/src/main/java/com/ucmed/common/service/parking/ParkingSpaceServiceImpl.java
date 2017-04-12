@@ -3,6 +3,7 @@ package com.ucmed.common.service.parking;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.ucmed.common.dao.fix.FixOrderMapper;
 import com.ucmed.common.dao.parking.ParkingSpaceMapper;
 import com.ucmed.common.dataobj.parking.ParkingSpace;
 import com.ucmed.common.model.parking.ParkingSpaceModel;
@@ -14,6 +15,11 @@ import com.ucmed.common.util.ModelDataObjectUtil;
  */
 public class ParkingSpaceServiceImpl implements ParkingSpaceService {
 	private ParkingSpaceMapper parkingSpaceMapper;
+	private FixOrderMapper fixOrderMapper;
+
+	public void setFixOrderMapper(FixOrderMapper fixOrderMapper) {
+		this.fixOrderMapper = fixOrderMapper;
+	}
 
 	public void setParkingSpaceMapper(ParkingSpaceMapper parkingSpaceMapper) {
 		this.parkingSpaceMapper = parkingSpaceMapper;
@@ -93,12 +99,21 @@ public class ParkingSpaceServiceImpl implements ParkingSpaceService {
 		List<ParkingSpaceModel> models = new ArrayList<>();
 		for (ParkingSpace parkingSpace : list) {
 			ParkingSpaceModel model = ModelDataObjectUtil.model2do(parkingSpace, ParkingSpaceModel.class);
+			Long fixCount = fixOrderMapper.getPrakFixCount(model.getId());
+			model.setFixNumber(fixCount);
 			if (model.getBikeNumber() == 0) {
 				model.setPercentum((double)0);
 			} else if (model.getParkNumber() < model.getBikeNumber()) {
 				model.setPercentum((double)1);
 			} else {
 				model.setPercentum((double)model.getBikeNumber() / model.getParkNumber() * 100);
+			}
+			if (fixCount == 0) {
+				model.setFixPercentum((double)0);
+			} else if (fixCount < model.getBikeNumber()) {
+				model.setFixPercentum((double)1);
+			} else {
+				model.setFixPercentum((double)model.getBikeNumber() / model.getParkNumber() * 100);
 			}
 			models.add(model);
 		}
@@ -135,7 +150,24 @@ public class ParkingSpaceServiceImpl implements ParkingSpaceService {
 		}
 		List<ParkingSpaceModel> models = new ArrayList<>();
 		for (ParkingSpace parkingSpace : list) {
-			models.add(ModelDataObjectUtil.model2do(parkingSpace, ParkingSpaceModel.class));
+			ParkingSpaceModel model = ModelDataObjectUtil.model2do(parkingSpace, ParkingSpaceModel.class);
+			Long fixCount = fixOrderMapper.getPrakFixCount(model.getId());
+			model.setFixNumber(fixCount);
+			if (model.getBikeNumber() == 0) {
+				model.setPercentum((double)0);
+			} else if (model.getParkNumber() < model.getBikeNumber()) {
+				model.setPercentum((double)1);
+			} else {
+				model.setPercentum((double)model.getBikeNumber() / model.getParkNumber() * 100);
+			}
+			if (fixCount == 0) {
+				model.setFixPercentum((double)0);
+			} else if (fixCount < model.getBikeNumber()) {
+				model.setFixPercentum((double)1);
+			} else {
+				model.setFixPercentum((double)model.getBikeNumber() / model.getParkNumber() * 100);
+			}
+			models.add(model);
 		}
 		return models;
 	}

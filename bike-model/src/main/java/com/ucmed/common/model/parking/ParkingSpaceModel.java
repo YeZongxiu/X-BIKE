@@ -1,5 +1,8 @@
 package com.ucmed.common.model.parking;
 
+import com.ucmed.common.util.StringUtil;
+import net.sf.json.JSONObject;
+
 public class ParkingSpaceModel {
     private Long id;
 
@@ -12,6 +15,26 @@ public class ParkingSpaceModel {
     private Long parkNumber;
     
     private Double percentum;
+
+    private Long fixNumber;
+
+    private Double fixPercentum;
+
+    public Long getFixNumber() {
+        return fixNumber;
+    }
+
+    public void setFixNumber(Long fixNumber) {
+        this.fixNumber = fixNumber;
+    }
+
+    public Double getFixPercentum() {
+        return fixPercentum;
+    }
+
+    public void setFixPercentum(Double fixPercentum) {
+        this.fixPercentum = fixPercentum;
+    }
 
     public Long getId() {
         return id;
@@ -60,5 +83,31 @@ public class ParkingSpaceModel {
 	public void setPercentum(Double percentum) {
 		this.percentum = percentum;
 	}
+
+    public JSONObject getJsonObject(){
+        JSONObject json = new JSONObject();
+        if (StringUtil.isNotBlank(this.id)){
+            json.put("id", this.id);
+        }
+        if (StringUtil.isNotBlank(this.longitude)){
+            json.put("longitude", this.longitude);
+        }
+        if (StringUtil.isNotBlank(this.latitude)){
+            json.put("latitude", this.latitude);
+        }
+        if (StringUtil.isNotBlank(this.percentum)){
+            json.put("percentum", this.percentum);
+        }
+        if (StringUtil.isNotBlank(this.bikeNumber)){
+            json.put("quantity", this.bikeNumber);
+        }
+        if (StringUtil.isNotBlank(this.fixPercentum)){
+            json.put("fix_percentum", this.fixPercentum);
+        }
+        if (StringUtil.isNotBlank(this.fixNumber)){
+            json.put("fix_quantity", this.fixNumber);
+        }
+        return  json;
+    }
     
 }

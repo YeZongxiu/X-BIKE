@@ -2,6 +2,7 @@ package com.ucmed.common.api.bike;
 
 import java.util.List;
 
+import com.ucmed.common.service.fix.FixOrderService;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 
@@ -19,8 +20,13 @@ public class GetParkingBikeApi implements Api{
 	private static final Logger LOG = LoggerFactory.getLogger(GetParkingBikeApi.class);
 	private BikeService bikeService;
 	private ParkingSpaceService parkingSpaceService;
+    private FixOrderService fixOrderService;
 
-	public void setBikeService(BikeService bikeService) {
+    public void setFixOrderService(FixOrderService fixOrderService) {
+        this.fixOrderService = fixOrderService;
+    }
+
+    public void setBikeService(BikeService bikeService) {
 		this.bikeService = bikeService;
 	}
 
@@ -44,14 +50,17 @@ public class GetParkingBikeApi implements Api{
 			result.put("parking_list", new JSONArray());
 		} else {
             JSONArray array = new JSONArray();
+            JSONArray fixArray = new JSONArray();
             for (ParkingSpaceModel parkingSpaceModel : parkingSpaceModels) {
-                JSONObject obj = JSONObject.fromObject(parkingSpaceModel);
+                JSONObject obj = parkingSpaceModel.getJsonObject();
                 List<BikeModel> bikes = bikeService.getBikesByPark(parkingSpaceModel.getId());
                 if (null == bikes || bikes.isEmpty()){
                     obj.put("parking_bike_list", new JSONArray());
                 } else {
                     obj.put("parking_bike_list", JSONArray.fromObject(bikes));
                 }
+                fixArray = fixOrderService.getFixOrderByPark(parkingSpaceModel.getId());
+                obj.put("fix_bike_list", fixArray);
                 array.add(obj);
             }
             result.put("parking_list", array);
@@ -62,6 +71,7 @@ public class GetParkingBikeApi implements Api{
 		} else {
 			result.put("bike_list", JSONArray.fromObject(bikeModels));
 		}
+        result.put("fix_bike_list", fixOrderService.getBikeFixList(Double.valueOf(longitude), Double.valueOf(latitude)));
         result.put("ret_code", Constants.API_RESPONSE_RESULT_RET_CODE_SUCCESS);
         result.put("ret_info", "获取车辆站点信息成功");
         return result;

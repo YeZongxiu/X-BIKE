@@ -60,12 +60,23 @@ public class LoginController {
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "super.htm")
-    public String b(HttpServletRequest request, ModelMap map) {
+    public String index(HttpServletRequest request, ModelMap map) {
         return "admin/layout/index";
     }
 
     private void updateUser(UserModel user) {
         user.setLastLoginTime(new Date());
         user.setLoginTime(user.getLoginTime() == null ? 0 : user.getLoginTime() + 1);
+    }
+
+    @RequestMapping(method = RequestMethod.GET, value = "loginOut.htm")
+    public void loginOut(HttpServletRequest request, ModelMap map, HttpServletResponse response) throws IOException {
+        JSONObject result = new JSONObject();
+        String apiName = "api.bike.user.login.out";
+        JSONObject params = new JSONObject();
+        String session_id = (String) request.getSession().getAttribute("session_id");
+        result = XBIKE.getInstance().requestActionParams(apiName, params, session_id).optJSONObject("return_params");
+        request.getSession().removeAttribute("session_id");
+        response.sendRedirect("/login/index.htm");
     }
 }

@@ -3,6 +3,9 @@
 </style>
 <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=nry1ogpPPBHyTnftGh5mng8fbsCmV7v2"></script>
 <script src="/admin/js/jquery.min.js"></script>
+<link rel="stylesheet" href="/admin/css/weui.min.css">
+<link rel="stylesheet" href="/admin/css/jquery-weui.css">
+<script src="/admin/js/jquery-weui.js"></script>
 <body>
 <div id="allmap"></div>
 </body>
@@ -10,6 +13,7 @@
 <script type="text/javascript">
     // 百度地图API功能
     var map = new BMap.Map("allmap");
+    var myIcon = new BMap.Icon("/admin/images/park.png", new BMap.Size(21,29));
     #if($!result.ret_code == 1)
         alert('$result.ret_info');
         map.centerAndZoom("杭州", 15);
@@ -17,7 +21,14 @@
         #set($count = 0)
         #foreach($park in $result.parking_list)
             var p$count = new BMap.Point($park.longitude,$park.latitude);
-            var marker$count = new BMap.Marker(p$count);
+            var marker$count = new BMap.Marker(p$count,{icon:myIcon});
+            var marker = marker$count;
+            marker.addEventListener("click", function(){
+                $.alert({
+                    title: '车辆信息',
+                    text: '<div>停车数量：$park.quantity </div><div>站点内维修车辆数量：$park.fix_quantity </div>'
+                });
+            });
             map.addOverlay(marker$count);
             #set($count = $count + 1)
         #end
