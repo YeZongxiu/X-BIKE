@@ -7,9 +7,7 @@ import com.ucmed.common.dataobj.parking.ParkingSpace;
 import com.ucmed.common.model.bike.BikeModel;
 import com.ucmed.common.model.fix.FixOrderModel;
 import com.ucmed.common.model.parking.ParkingSpaceModel;
-import com.ucmed.common.util.Constants;
-import com.ucmed.common.util.GetDistanceUtil;
-import com.ucmed.common.util.ModelDataObjectUtil;
+import com.ucmed.common.util.*;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 import org.springframework.ui.Model;
@@ -67,6 +65,26 @@ public class FixOrderServiceImpl implements FixOrderService{
             array.add(fixOrder.getJsonObject());
         }
         return array;
+    }
+
+    @Override
+    public PaginationResult<FixOrderModel> getFixOrderList(Long pageNo, Long pageSize) {
+        PaginationResult<FixOrderModel> result = new PaginationResult<>();
+        Long count = fixOrderMapper.getFixCount();
+        result.setTotalCount(count);
+        Long pageCount = PageUtil.getPageCount(count, pageSize);
+        result.setPageCount(pageCount);
+        List<FixOrder> list = fixOrderMapper.selectFixList(PageUtil.getStartRecord(pageNo, pageSize),
+                PageUtil.getEndRecord(pageNo, pageSize));
+        if(list == null) {
+            list = new ArrayList<FixOrder>();
+        }
+        for(FixOrder fixOrder : list) {
+            result.getList().add(
+                    ModelDataObjectUtil.do2model(fixOrder,
+                            FixOrderModel.class));
+        }
+        return result;
     }
 
     @Override

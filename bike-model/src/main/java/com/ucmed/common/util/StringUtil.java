@@ -5,7 +5,9 @@ import java.util.regex.Pattern;
 
 import net.sourceforge.pinyin4j.PinyinHelper;
 
-public class StringUtil {
+import javax.servlet.http.HttpServletRequest;
+
+public class 	StringUtil {
 
 	/**
 	 * 是否是手机号码
@@ -79,5 +81,15 @@ public class StringUtil {
 			return date.split(" ")[0];
 		}
 		return date;
+	}
+
+	public static Long getValueFromRequestLong(HttpServletRequest request,
+											   String key, Long defaultValue) {
+		Long value = defaultValue;
+		try {
+			value = Long.parseLong(request.getParameter(key));
+		} catch(NumberFormatException e) {
+		}
+		return value;
 	}
 }

@@ -149,4 +149,27 @@ public interface FixOrderMapper {
             "select count(*) from fix_order",
             "where park_id = #{parkId,jdbcType=DECIMAL}"})
     Long getPrakFixCount(Long parkId);
+
+    @Select({
+            "select count(*) from fix_order"})
+    Long getFixCount();
+
+    @Select({
+            "select",
+            "id, bike_type_name, bike_no, longitude, latitude, status",
+            "from fix_order",
+            "JOIN bike_type ON fix_order.bike_type_id = bike_type.id",
+            "order by fix_order.create_time desc",
+            "limit #{start,jdbcType=BIGINT}, #{offset,jdbcType=BIGINT}"
+    })
+    @Results({
+            @Result(column="id", property="id", jdbcType=JdbcType.DECIMAL, id=true),
+            @Result(column="bike_type_name", property="bikeTypeName", jdbcType=JdbcType.VARCHAR),
+            @Result(column="bike_no", property="bikeNo", jdbcType=JdbcType.VARCHAR),
+            @Result(column="longitude", property="longitude", jdbcType=JdbcType.VARCHAR),
+            @Result(column="latitude", property="latitude", jdbcType=JdbcType.VARCHAR),
+            @Result(column="status", property="status", jdbcType=JdbcType.VARCHAR)
+    })
+    List<FixOrder> selectFixList(@Param("start") Long start,
+                                 @Param("end") Long offset);
 }
