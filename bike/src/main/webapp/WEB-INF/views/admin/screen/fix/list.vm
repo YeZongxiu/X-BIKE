@@ -6,6 +6,9 @@
     th, td{
         text-align: center;
     }
+    input {
+        width: 150px !important;
+    }
 </style>
 <div style="background-color: #F7F7F7; overflow: hidden" id="table">
     <div class="page-title">
@@ -92,9 +95,10 @@
     function showDetail(){
         $.modal({
             title: "详情",
+            text: "<form><div>车辆类型：<input type='text' disable class='weui-input weui-prompt-input' id='bike_type_name'></div><div>车牌号：<input type='text' class='weui-input weui-prompt-input' id='bike_no'></div><div>经度：<input type='text' class='weui-input weui-prompt-input' id='longitude'></div><div>纬度：<input type='text' class='weui-input weui-prompt-input' id='latitude'></div><div>状态：<input type='text' class='weui-input weui-prompt-input' id='status'><fieldset><div class='control-group'><div class='controls'><div class='input-prepend input-group'><span class='add-on input-group-addon'><i class='glyphicon glyphicon-calendar fa fa-calendar'></i></span> <input type='text' style='width: 150px' name='reservation' id='create_date' class='form-control' /></div></div></div></fieldset><fieldset><div class='control-group'><div class='controls'><div class='input-prepend input-group'><span class='add-on input-group-addon'><i class='glyphicon glyphicon-calendar fa fa-calendar'></i></span> <input type='text' style='width: 150px' name='reservation' id='update_date' class='form-control' /></div></div></div></fieldset></form>",
             buttons: [
-                { text: "支付宝", onClick: function(){ console.log(1)} },
-                { text: "微信支付", onClick: function(){ console.log(2)} }
+                { text: "保存", onClick: function(){} },
+                { text: "取消", onClick: function(){} }
             ]
         });
     }
