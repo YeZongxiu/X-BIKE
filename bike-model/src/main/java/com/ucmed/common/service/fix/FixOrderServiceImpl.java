@@ -73,7 +73,11 @@ public class FixOrderServiceImpl implements FixOrderService{
         Long count = fixOrderMapper.getFixCount();
         result.setTotalCount(count);
         Long pageCount = PageUtil.getPageCount(count, pageSize);
+        if (pageNo > pageCount){
+            pageNo = pageCount;
+        }
         result.setPageCount(pageCount);
+        Long start = PageUtil.getStartRecord(pageNo, pageSize);
         List<FixOrder> list = fixOrderMapper.selectFixList(PageUtil.getStartRecord(pageNo, pageSize),
                 PageUtil.getEndRecord(pageNo, pageSize));
         if(list == null) {

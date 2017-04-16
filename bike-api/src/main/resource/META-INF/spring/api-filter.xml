@@ -54,6 +54,7 @@
                 <value>api.bike.use.list</value>
                 <value>api.bike.user.scan.info</value>
                 <value>api.bike.admin.get.park</value>
+                <value>api.admin.get.fix.list</value>
             </list>
         </property>
     </bean>

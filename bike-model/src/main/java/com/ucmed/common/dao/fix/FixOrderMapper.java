@@ -156,11 +156,11 @@ public interface FixOrderMapper {
 
     @Select({
             "select",
-            "id, bike_type_name, bike_no, longitude, latitude, status",
+            "fix_order.id, bike_type_name, bike_no, longitude, latitude, status",
             "from fix_order",
             "JOIN bike_type ON fix_order.bike_type_id = bike_type.id",
             "order by fix_order.create_time desc",
-            "limit #{start,jdbcType=BIGINT}, #{offset,jdbcType=BIGINT}"
+            "limit #{start,jdbcType=BIGINT}, #{end,jdbcType=BIGINT}"
     })
     @Results({
             @Result(column="id", property="id", jdbcType=JdbcType.DECIMAL, id=true),

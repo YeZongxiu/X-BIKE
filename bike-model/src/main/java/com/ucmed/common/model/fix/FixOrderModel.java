@@ -1,5 +1,8 @@
 package com.ucmed.common.model.fix;
 
+import com.ucmed.common.util.StringUtil;
+import net.sf.json.JSONObject;
+
 import java.util.Date;
 
 public class FixOrderModel {
@@ -141,6 +144,29 @@ public class FixOrderModel {
 
     public void setTwoBarCodes(String twoBarCodes) {
         this.twoBarCodes = twoBarCodes;
+    }
+
+    public JSONObject getJsonObject(){
+        JSONObject json = new JSONObject();
+        if (StringUtil.isNotBlank(this.id)){
+            json.put("id", this.id);
+        }
+        if (StringUtil.isNotBlank(this.longitude)){
+            json.put("longitude", this.longitude);
+        }
+        if (StringUtil.isNotBlank(this.latitude)){
+            json.put("latitude", this.latitude);
+        }
+        if (StringUtil.isNotBlank(this.bikeTypeName)){
+            json.put("bike_type_name", this.bikeTypeName);
+        }
+        if (StringUtil.isNotBlank(this.bikeNo)){
+            json.put("bike_no", this.bikeNo);
+        }
+        if (StringUtil.isNotBlank(this.status)){
+            json.put("status", FixStatus.equals(Long.parseLong(this.status)).getStatusName());
+        }
+        return  json;
     }
 
     public enum FixStatus {

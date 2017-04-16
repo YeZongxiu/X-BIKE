@@ -31,6 +31,7 @@
                         <ul class="nav side-menu">
                             <li><a><i class="fa fa-table"></i> 车辆维修情况 <span class="fa fa-chevron-down"></span></a>
                                 <ul class="nav child_menu">
+                                    <li onclick="gotoUrl('/admin/getFixList.htm')">维修记录</li>
                                 </ul>
                             </li>
                             <li><a><i class="fa fa-bar-chart-o"></i> 数据统计 <span
@@ -80,9 +81,15 @@
 
         <!-- page content -->
         <div class="right_col" role="main" id="content_div">
-            <iframe src="/admin/getParkInfo.htm" id="content" name="content" frameborder="no" border="0" style="width:100%;height:100%;">
+            <iframe src="/admin/getParkInfo.htm" id="content" name="content" frameborder="no" border="0" style="width: 100%">
             </iframe>
         </div>
     </div>
 </div>
+<script>
+    $("#content").load(function () {
+        var mainheight = $(this).contents().find("body").height();
+        $(this).height(mainheight);
+    });
+</script>
 </body>

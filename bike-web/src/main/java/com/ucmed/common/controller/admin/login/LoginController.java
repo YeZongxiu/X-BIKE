@@ -79,4 +79,14 @@ public class LoginController {
         request.getSession().removeAttribute("session_id");
         response.sendRedirect("/login/index.htm");
     }
+
+    @RequestMapping(method = RequestMethod.GET, value = "error.htm")
+    public void error(HttpServletRequest request, ModelMap map, HttpServletResponse response) throws IOException {
+        String session_id = (String) request.getSession().getAttribute("session_id");
+        Integer result = 1;
+        if(StringUtil.isNotBlank(session_id)){
+            result = 0;
+        }
+        ResultUtil.writeResult(response, result.toString());
+    }
 }

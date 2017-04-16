@@ -13,6 +13,8 @@ import net.sf.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.List;
+
 /**
  * Created by ucmed on 2017/4/15.
  */
@@ -43,14 +45,19 @@ public class GetFixOrderListApi implements Api{
         if (!StringUtil.isNotBlank(user.getIsAdmin()) && !"1".equals(user.getIsAdmin())){
             return errorResult(result, "您不是管理员，不能添加车辆信息。", "错误：不是管理员，无法增加车辆");
         }
-        Long pageNo = DataUtil.getLongValue(params, "page_no",
+        Long pageNo = DataUtil.getLongValue(params, "pageNo",
                 PageUtil.DEFAULT_PAGE_NO);
-        Long pageSize = DataUtil.getLongValue(params, "page_size",
+        Long pageSize = DataUtil.getLongValue(params, "pageSize",
                 PageUtil.DEFAULT_PAGE_SIZE);
         PaginationResult<FixOrderModel> fixOrders = fixOrderService.getFixOrderList(pageNo, pageSize);
+        List<FixOrderModel> list = fixOrders.getList();
+        JSONArray array = new JSONArray();
+        for (FixOrderModel model : list) {
+            array.add(model.getJsonObject());
+        }
         result.put("total_count", fixOrders.getTotalCount());
         result.put("page_count", fixOrders.getPageCount());
-        result.put("list", JSONArray.fromObject(fixOrders.getList()));
+        result.put("list", array);
         result.put("ret_code", Constants.API_RESPONSE_RESULT_RET_CODE_SUCCESS);
         result.put("ret_info", "获取报修数据成功");
         return  result;
@@ -66,4 +73,5 @@ public class GetFixOrderListApi implements Api{
         LOG.warn(logString);
         return result;
     }
+
 }

@@ -16,6 +16,13 @@
     <link href="/admin/css/animate.min.css" rel="stylesheet">
     <link href="/admin/css/custom.min.css" rel="stylesheet">
     <script src="/admin/js/jquery.min.js"></script>
+    <script src="/admin/js/common.js"></script>
+    <link rel="stylesheet" type="text/css" href="/admin/css/buttons.bootstrap.min.css"/>
+    <link rel="stylesheet" type="text/css" href="/admin/css/dataTables.bootstrap.min.css"/>
+    <link rel="stylesheet" type="text/css" href="/admin/css/fixedHeader.bootstrap.min.css"/>
+    <link rel="stylesheet" type="text/css" href="/admin/css/responsive.bootstrap.min.css"/>
+    <link rel="stylesheet" type="text/css" href="/admin/css/scroller.bootstrap.min.css"/>
+    <link rel="stylesheet" type="text/css" href="/admin/css/pagination.css"/>
     <title id="title-header">x-bike</title>
 
 </head>
@@ -50,5 +57,20 @@
 <script src="/admin/js/moment.min.js"></script>
 <script src="/admin/js/daterangepicker.js"></script>
 <script src="/admin/js/custom.min.js"></script>
+<script type="text/javascript" src="/admin/js/buttons.bootstrap.min.js"></script>
+<script type="text/javascript" src="/admin/js/buttons.flash.min.js"></script>
+<script type="text/javascript" src="/admin/js/buttons.html5.min.js"></script>
+<script type="text/javascript" src="/admin/js/buttons.print.min.js"></script>
+<script type="text/javascript" src="/admin/js/dataTables.bootstrap.min.js"></script>
+<script type="text/javascript" src="/admin/js/dataTables.buttons.min.js"></script>
+<script type="text/javascript" src="/admin/js/dataTables.fixedHeader.min.js"></script>
+<script type="text/javascript" src="/admin/js/dataTables.keyTable.min.js"></script>
+<script type="text/javascript" src="/admin/js/dataTables.responsive.min.js"></script>
+<script type="text/javascript" src="/admin/js/dataTables.scroller.min.js"></script>
+<script type="text/javascript" src="/admin/js/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="/admin/js/jszip.min.js"></script>
+<script type="text/javascript" src="/admin/js/pdfmake.min.js"></script>
+<script type="text/javascript" src="/admin/js/responsive.bootstrap.js"></script>
+<script type="text/javascript" src="/admin/js/vfs_fonts.js"></script>
 </body>
 </html>
