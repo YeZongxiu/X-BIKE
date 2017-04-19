@@ -44,11 +44,11 @@
                         #foreach($model in $result.list)
                         <tr>
                             <td>$count</td>
-                            <td>$model.bike_type_name</td>
-                            <td>$model.bike_no</td>
-                            <td>$model.longitude</td>
-                            <td>$model.latitude</td>
-                            <td>$model.status</td>
+                            <td>$!model.bike_type_name</td>
+                            <td>$!model.bike_no</td>
+                            <td>$!model.longitude</td>
+                            <td>$!model.latitude</td>
+                            <td>$!model.status</td>
                             <td style="font-size: 20px;padding: 0;line-height: 34px;" onclick="showDetail('$model.id');"><a><li class="fa fa-edit"></li></a></td>
                         </tr>
                             #set($count = $count + 1)
@@ -92,14 +92,23 @@
         var next =  parseInt(current.text()) + 1;
         window.location.href = "/admin/getFixList.htm?pageNo=" + next + "&pageSize=" + pageSize;
     }
-    function showDetail(){
+    function showDetail(id){
         $.modal({
             title: "详情",
-            text: "<form><div>车辆类型：<input type='text' disable class='weui-input weui-prompt-input' id='bike_type_name'></div><div>车牌号：<input type='text' class='weui-input weui-prompt-input' id='bike_no'></div><div>经度：<input type='text' class='weui-input weui-prompt-input' id='longitude'></div><div>纬度：<input type='text' class='weui-input weui-prompt-input' id='latitude'></div><div>状态：<input type='text' class='weui-input weui-prompt-input' id='status'><fieldset><div class='control-group'><div class='controls'><div class='input-prepend input-group'><span class='add-on input-group-addon'><i class='glyphicon glyphicon-calendar fa fa-calendar'></i></span> <input type='text' style='width: 150px' name='reservation' id='create_date' class='form-control' /></div></div></div></fieldset><fieldset><div class='control-group'><div class='controls'><div class='input-prepend input-group'><span class='add-on input-group-addon'><i class='glyphicon glyphicon-calendar fa fa-calendar'></i></span> <input type='text' style='width: 150px' name='reservation' id='update_date' class='form-control' /></div></div></div></fieldset></form>",
+            text: "<form>"
+                + "<div>车辆类型：<input type='text' disable class='weui-input weui-prompt-input' id='bike_type_name'></div>"
+                + "<div>车 牌 号 ：<input type='text' class='weui-input weui-prompt-input' id='bike_no'></div>"
+                + "<div>经 &nbsp; &nbsp; &nbsp; 度：<input type='text' class='weui-input weui-prompt-input' id='longitude'></div>"
+                + "<div>纬 &nbsp; &nbsp; &nbsp; 度：<input type='text' class='weui-input weui-prompt-input' id='latitude'></div>"
+                + "<div>状 &nbsp; &nbsp; &nbsp; 态：<input type='text' class='weui-input weui-prompt-input' id='status'></div>"
+                + '<div style="position: relative"><div style="display: inline-block; position: absolute; left: 10px;">创建时间：</div><div class="control-group" style="display: inline-block"><div class="controls"><div class="col-md-11 xdisplay_inputx form-group has-feedback" style="margin:10px 0 0 0;"><input type="text" class="form-control has-feedback-left" id="single_cal1" placeholder="First Name" aria-describedby="inputSuccess2Status"><span class="fa fa-calendar-o form-control-feedback left" aria-hidden="true"></span><span id="inputSuccess2Status" class="sr-only">(success)</span></div></div></div></div>'
+                + '<fieldset>更新时间：<div class="control-group"><div class="controls"><div class="col-md-11 xdisplay_inputx form-group has-feedback" style="float: right;"><input type="text" class="form-control has-feedback-left" id="single_cal1" placeholder="First Name" aria-describedby="inputSuccess2Status"><span class="fa fa-calendar-o form-control-feedback left" aria-hidden="true"></span><span id="inputSuccess2Status" class="sr-only">(success)</span></div></div></div></fieldset>'
+                + "</form>",
             buttons: [
                 { text: "保存", onClick: function(){} },
                 { text: "取消", onClick: function(){} }
             ]
         });
+        init_daterangepicker_single_call();
     }
 </script>
