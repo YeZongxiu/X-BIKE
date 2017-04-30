@@ -48,6 +48,24 @@ public class UserScanInfoApi implements Api{
             return errorResult(result, "未查询到您借的车辆。", "错误：用户没有借车");
         }
         RecordModel model = recordModels.get(0);
+        Date endDate = new Date();
+        Date startDate = model.getStartTime();
+        Long between = endDate.getTime() - startDate.getTime();
+        Long hour = between / (60 * 60 * 1000);
+        Long minute = (between - hour * 60 * 60 * 1000)/(60 * 1000);
+        Long second = (between - hour * 60 * 60 * 1000 - minute * 60 * 1000)/1000;
+        StringBuffer time = new StringBuffer();
+        if (hour > 0){
+            time.append(hour + "小时");
+        }
+        if ((hour * 60) < (between/(60 * 1000))){
+            hour = hour + 1;
+        }
+        Integer cost = Integer.valueOf(hour.toString());
+        time.append(minute + "分钟");
+        time.append(second + "秒");
+        result.put("time", time.toString());
+        result.put("cost", cost);
         result.put("start_time", DateUtil.dateToString4(model.getStartTime()));
         result.put("bike_no", model.getBikeNo());
         result.put("bike_type_name", model.getBikeTypeName());

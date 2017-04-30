@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 60011
 File Encoding         : 65001
 
-Date: 2017-04-12 23:14:50
+Date: 2017-04-30 23:18:10
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -34,7 +34,7 @@ CREATE TABLE `api_flow_jnl` (
   `ip` varchar(20) DEFAULT NULL,
   `tmp5` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6620 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=6634 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of api_flow_jnl
@@ -6658,6 +6658,20 @@ INSERT INTO `api_flow_jnl` VALUES ('6616', '2017-04-12 20:58:36', '20170412', '2
 INSERT INTO `api_flow_jnl` VALUES ('6617', '2017-04-12 22:03:04', '20170412', '22', '4', '12', '2017', 'api.bike.user.login', null, '{\"params\":{\"phone\":\"15757125494\",\"password\":\"123456\",\"session_id\":\"\"},\"api_name\":\"api.bike.user.login\"}', null, '', null);
 INSERT INTO `api_flow_jnl` VALUES ('6618', '2017-04-12 22:57:26', '20170412', '22', '4', '12', '2017', 'api.bike.user.login', null, '{\"params\":{\"phone\":\"15757125494\",\"password\":\"123456\",\"session_id\":\"\"},\"api_name\":\"api.bike.user.login\"}', null, '', null);
 INSERT INTO `api_flow_jnl` VALUES ('6619', '2017-04-12 23:00:06', '20170412', '23', '4', '12', '2017', 'api.bike.user.login', null, '{\"params\":{\"phone\":\"15757125494\",\"password\":\"123456\",\"session_id\":\"\"},\"api_name\":\"api.bike.user.login\"}', null, '', null);
+INSERT INTO `api_flow_jnl` VALUES ('6620', '2017-04-15 20:51:58', '20170415', '20', '4', '15', '2017', 'api.bike.user.login', null, '{\"params\":{\"phone\":\"15757125494\",\"password\":\"123456\",\"session_id\":\"\"},\"api_name\":\"api.bike.user.login\"}', null, '', null);
+INSERT INTO `api_flow_jnl` VALUES ('6621', '2017-04-15 21:01:54', '20170415', '21', '4', '15', '2017', 'api.bike.user.login', null, '{\"params\":{\"phone\":\"15757125494\",\"password\":\"123456\",\"session_id\":\"\"},\"api_name\":\"api.bike.user.login\"}', null, '', null);
+INSERT INTO `api_flow_jnl` VALUES ('6622', '2017-04-16 10:04:55', '20170416', '10', '4', '16', '2017', 'api.bike.user.login', null, '{\"params\":{\"phone\":\"15757125494\",\"password\":\"123456\",\"session_id\":\"\"},\"api_name\":\"api.bike.user.login\"}', null, '', null);
+INSERT INTO `api_flow_jnl` VALUES ('6623', '2017-04-16 11:24:28', '20170416', '11', '4', '16', '2017', 'api.bike.user.login', null, '{\"params\":{\"phone\":\"15757125494\",\"password\":\"123456\",\"session_id\":\"\"},\"api_name\":\"api.bike.user.login\"}', null, '', null);
+INSERT INTO `api_flow_jnl` VALUES ('6624', '2017-04-16 11:45:46', '20170416', '11', '4', '16', '2017', 'api.bike.user.login', null, '{\"params\":{\"phone\":\"15757125494\",\"password\":\"123456\",\"session_id\":\"\"},\"api_name\":\"api.bike.user.login\"}', null, '', null);
+INSERT INTO `api_flow_jnl` VALUES ('6625', '2017-04-16 11:47:37', '20170416', '11', '4', '16', '2017', 'api.bike.user.login', null, '{\"params\":{\"phone\":\"15757125494\",\"password\":\"123456\",\"session_id\":\"\"},\"api_name\":\"api.bike.user.login\"}', null, '', null);
+INSERT INTO `api_flow_jnl` VALUES ('6626', '2017-04-16 12:21:24', '20170416', '12', '4', '16', '2017', 'api.bike.user.login', null, '{\"params\":{\"phone\":\"15757125494\",\"password\":\"123456\",\"session_id\":\"\"},\"api_name\":\"api.bike.user.login\"}', null, '', null);
+INSERT INTO `api_flow_jnl` VALUES ('6627', '2017-04-16 12:52:16', '20170416', '12', '4', '16', '2017', 'api.bike.user.login', null, '{\"params\":{\"phone\":\"15757125494\",\"password\":\"123456\",\"session_id\":\"\"},\"api_name\":\"api.bike.user.login\"}', null, '', null);
+INSERT INTO `api_flow_jnl` VALUES ('6628', '2017-04-16 15:30:12', '20170416', '15', '4', '16', '2017', 'api.bike.user.login', null, '{\"params\":{\"phone\":\"15757125494\",\"password\":\"123456\",\"session_id\":\"\"},\"api_name\":\"api.bike.user.login\"}', null, '', null);
+INSERT INTO `api_flow_jnl` VALUES ('6629', '2017-04-16 19:28:14', '20170416', '19', '4', '16', '2017', 'api.bike.user.login', null, '{\"params\":{\"phone\":\"15757125494\",\"password\":\"123456\",\"session_id\":\"\"},\"api_name\":\"api.bike.user.login\"}', null, '', null);
+INSERT INTO `api_flow_jnl` VALUES ('6630', '2017-04-16 23:37:50', '20170416', '23', '4', '16', '2017', 'api.bike.user.login', null, '{\"params\":{\"phone\":\"15757125494\",\"password\":\"123456\",\"session_id\":\"\"},\"api_name\":\"api.bike.user.login\"}', null, '', null);
+INSERT INTO `api_flow_jnl` VALUES ('6631', '2017-04-30 22:37:50', '20170430', '22', '4', '30', '2017', 'api.bike.mac.validate', null, '{\"api_name\":\"api.bike.mac.validate\",\"params\":{\"mac\":\"13515712511\",\"session_id\":\"\"},\"session_id\":\"\"}', null, '', null);
+INSERT INTO `api_flow_jnl` VALUES ('6632', '2017-04-30 22:38:47', '20170430', '22', '4', '30', '2017', 'api.bike.mac.validate', null, '{\"api_name\":\"api.bike.mac.validate\",\"params\":{\"mac\":\"123-123-123\",\"session_id\":\"\"},\"session_id\":\"\"}', null, '', null);
+INSERT INTO `api_flow_jnl` VALUES ('6633', '2017-04-30 22:40:41', '20170430', '22', '4', '30', '2017', 'api.bike.user.login', null, '{\"api_name\":\"api.bike.user.login\",\"params\":{\"phone\":\"15757125494\",\"password\":\"123456\",\"session_id\":\"\"},\"session_id\":\"\"}', null, '', null);
 
 -- ----------------------------
 -- Table structure for bike
@@ -6718,7 +6732,23 @@ CREATE TABLE `bike_type` (
 INSERT INTO `bike_type` VALUES ('1', 'OFO', '2017-03-18 16:10:42', null, null);
 INSERT INTO `bike_type` VALUES ('2', 'HELLO单车', '2017-03-21 16:48:41', null, null);
 INSERT INTO `bike_type` VALUES ('3', '骑呗单车', '2017-03-21 16:49:08', null, null);
-INSERT INTO `bike_type` VALUES ('4', '嘀嗒出行', '2017-03-21 16:49:22', null, null);
+INSERT INTO `bike_type` VALUES ('4', '叮嗒出行', '2017-03-21 16:49:22', null, null);
+
+-- ----------------------------
+-- Table structure for bluetooth
+-- ----------------------------
+DROP TABLE IF EXISTS `bluetooth`;
+CREATE TABLE `bluetooth` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `space_id` int(11) DEFAULT NULL COMMENT '停车位id',
+  `mac` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of bluetooth
+-- ----------------------------
+INSERT INTO `bluetooth` VALUES ('1', '25', '123-123-123');
 
 -- ----------------------------
 -- Table structure for fix_order
@@ -6739,7 +6769,7 @@ CREATE TABLE `fix_order` (
   `create_time` datetime DEFAULT NULL COMMENT '创建时间',
   `update_time` datetime DEFAULT NULL COMMENT '更新时间',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of fix_order
@@ -6747,6 +6777,14 @@ CREATE TABLE `fix_order` (
 INSERT INTO `fix_order` VALUES ('1', '2', '123456', '120.2020', '30.29459', 'http://localhost:8080/admin/images/dog.png', '123456', null, '', '1', null, null, null);
 INSERT INTO `fix_order` VALUES ('2', '2', '123456', '120.211527', '30.212447', null, '64646644', null, '', '0', null, null, null);
 INSERT INTO `fix_order` VALUES ('3', '2', '123456', '120.211527', '30.212447', null, '64646644', null, '', '0', null, null, null);
+INSERT INTO `fix_order` VALUES ('4', '2', '123456', '120.211527', '30.212447', '', '64646644', '', '', '0', null, '2017-04-16 12:28:32', null);
+INSERT INTO `fix_order` VALUES ('5', '2', '123456', '120.211527', '30.212447', '', '64646644', '', '', '0', null, '2017-04-16 12:28:36', null);
+INSERT INTO `fix_order` VALUES ('6', '2', '123456', '120.211527', '30.212447', '', '64646644', '', '', '0', null, '2017-04-16 12:28:36', null);
+INSERT INTO `fix_order` VALUES ('7', '2', '123456', '120.211527', '30.212447', '', '64646644', '', '', '0', null, '2017-04-16 12:28:36', null);
+INSERT INTO `fix_order` VALUES ('8', '2', '123456', '120.211527', '30.212447', '', '64646644', '', '', '0', null, '2017-04-16 12:28:36', null);
+INSERT INTO `fix_order` VALUES ('9', '2', '123456', '120.211527', '30.212447', '', '64646644', '', '', '0', null, '2017-04-16 12:28:36', null);
+INSERT INTO `fix_order` VALUES ('10', '2', '123456', '120.211527', '30.212447', '', '64646644', '', '', '0', null, '2017-04-16 12:28:36', null);
+INSERT INTO `fix_order` VALUES ('11', '2', '123456', '120.211527', '30.212447', '', '64646644', '', '', '0', null, '2017-04-16 12:28:36', null);
 
 -- ----------------------------
 -- Table structure for order
@@ -6779,7 +6817,7 @@ CREATE TABLE `parking_space` (
   `bike_number` int(11) DEFAULT NULL COMMENT '车辆停放数量',
   `park_number` int(11) DEFAULT NULL COMMENT '最多停车数量',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of parking_space
@@ -6841,7 +6879,7 @@ CREATE TABLE `record` (
 -- ----------------------------
 INSERT INTO `record` VALUES ('1', '1', '1', '2017-03-19 17:15:39', '2017-03-23 17:41:26', '6');
 INSERT INTO `record` VALUES ('2', '21', '1', '2017-03-23 17:39:57', '2017-03-23 17:54:44', '6');
-INSERT INTO `record` VALUES ('3', '21', '1', '2017-03-23 17:55:00', '2017-03-23 18:00:35', '6');
+INSERT INTO `record` VALUES ('3', '21', null, '2017-04-30 17:55:00', null, '7');
 
 -- ----------------------------
 -- Table structure for user
@@ -6868,7 +6906,7 @@ CREATE TABLE `user` (
 -- Records of user
 -- ----------------------------
 INSERT INTO `user` VALUES ('6', '13515712511', '987654', null, '2017-03-17 17:25:34', '2017-03-28 22:23:58', '174', null, '2017-03-19 16:02:56', '0', '200', '5', '1');
-INSERT INTO `user` VALUES ('7', '15757125494', '123456', null, '2017-03-19 16:21:47', '2017-04-12 23:00:06', '33', null, null, '0', '0', '0', '1');
+INSERT INTO `user` VALUES ('7', '15757125494', '123456', null, '2017-03-19 16:21:47', '2017-04-30 22:40:41', '45', null, null, '0', '200', '10', '1');
 
 -- ----------------------------
 -- Table structure for user_session
@@ -6890,4 +6928,4 @@ CREATE TABLE `user_session` (
 -- ----------------------------
 INSERT INTO `user_session` VALUES ('1', '0', null, null, '2017-03-17 20:08:12', '2017-03-18 10:52:54', '0');
 INSERT INTO `user_session` VALUES ('2', '6', null, 'a2389da8580f3399b9cbcb730c37acfab73c93e54c65510ab95c281b64db522b', '2017-03-18 10:53:27', '2017-03-28 22:23:58', '0');
-INSERT INTO `user_session` VALUES ('3', '7', null, '5f843c45543be7e93914aa7b71ff0137b24f6b4a02ffc61d83ec11d7aaf8164a', '2017-03-19 16:22:23', '2017-04-12 23:00:06', '0');
+INSERT INTO `user_session` VALUES ('3', '7', null, 'cd02e1315ea3adfbe927406160ec9505e28e8e151ddcfbcb917abeb6c816687a', '2017-03-19 16:22:23', '2017-04-30 22:40:41', '0');

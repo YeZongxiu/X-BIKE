@@ -20,6 +20,16 @@ public class ParkingSpaceModel {
 
     private Double fixPercentum;
 
+    private String[] macList;
+
+    public String[] getMacList() {
+        return macList;
+    }
+
+    public void setMacList(String[] macList) {
+        this.macList = macList;
+    }
+
     public Long getFixNumber() {
         return fixNumber;
     }

@@ -34,6 +34,7 @@
 	<bean id="changeBikeFixStatusApi" class="com.ucmed.common.api.fix.ChangeBikeFixStatusApi" />
 	<bean id="adminGetParkInfoApi" class="com.ucmed.common.api.admin.AdminGetParkInfoApi" />
 	<bean id="getFixOrderListApi" class="com.ucmed.common.api.fix.GetFixOrderListApi" />
+	<bean id="bikeMacValidateApi" class="com.ucmed.common.api.bike.MacValidateApi" />
 	
 	<bean id="apiFactory" class="com.ucmed.common.api.ApiFactoryImpl">
 		<property name="map">
@@ -62,6 +63,7 @@
 				<entry key="api.bike.admin.change.fix.status" value-ref="changeBikeFixStatusApi"/>
 				<entry key="api.bike.admin.get.park" value-ref="adminGetParkInfoApi"/>
 				<entry key="api.admin.get.fix.list" value-ref="getFixOrderListApi"/>
+				<entry key="api.bike.mac.validate" value-ref="bikeMacValidateApi"/>
 			</map>
 		</property>
 	</bean>

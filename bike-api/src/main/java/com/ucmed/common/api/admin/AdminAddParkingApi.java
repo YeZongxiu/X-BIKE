@@ -72,7 +72,12 @@ public class AdminAddParkingApi implements Api {
         } catch (Exception e) {
 			return errorResult(result, "坐标输入错误", "坐标错误");
 		}
-        ParkingSpaceModel model = addBikeInfo(count, latitude, longitude, number);
+        String macList = params.optString("mac_list");
+        String[] macs = null;
+        if (StringUtil.isNotBlank(macList)){
+            macs = macList.split(",");
+        }
+        ParkingSpaceModel model = addBikeInfo(count, latitude, longitude, number, macs);
         if (null != bikeModels && !bikeModels.isEmpty()){
             for (BikeModel bikeModel : bikeModels) {
                 bikeModel.setParkId(model.getId());
@@ -89,12 +94,13 @@ public class AdminAddParkingApi implements Api {
         return result;
     }
 
-    private ParkingSpaceModel addBikeInfo(Integer count, String latitude, String longitude, Integer number){
+    private ParkingSpaceModel addBikeInfo(Integer count, String latitude, String longitude, Integer number, String[] macList){
     	ParkingSpaceModel model = new ParkingSpaceModel();
         model.setBikeNumber(count.longValue());
         model.setLatitude(latitude);
         model.setLongitude(longitude);
         model.setParkNumber(number.longValue());
+        model.setMacList(macList);
         parkingSpaceService.addParkingInfo(model);
         boolean isSuccess = false;
         isSuccess = model.getId() != null;

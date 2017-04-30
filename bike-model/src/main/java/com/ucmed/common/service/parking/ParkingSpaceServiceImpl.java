@@ -4,7 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.ucmed.common.dao.fix.FixOrderMapper;
+import com.ucmed.common.dao.parking.BluetoothMapper;
 import com.ucmed.common.dao.parking.ParkingSpaceMapper;
+import com.ucmed.common.dataobj.parking.Bluetooth;
 import com.ucmed.common.dataobj.parking.ParkingSpace;
 import com.ucmed.common.model.parking.ParkingSpaceModel;
 import com.ucmed.common.util.Constants;
@@ -16,6 +18,11 @@ import com.ucmed.common.util.ModelDataObjectUtil;
 public class ParkingSpaceServiceImpl implements ParkingSpaceService {
 	private ParkingSpaceMapper parkingSpaceMapper;
 	private FixOrderMapper fixOrderMapper;
+	private BluetoothMapper bluetoothMapper;
+
+	public void setBluetoothMapper(BluetoothMapper bluetoothMapper) {
+		this.bluetoothMapper = bluetoothMapper;
+	}
 
 	public void setFixOrderMapper(FixOrderMapper fixOrderMapper) {
 		this.fixOrderMapper = fixOrderMapper;
@@ -30,6 +37,15 @@ public class ParkingSpaceServiceImpl implements ParkingSpaceService {
 		ParkingSpace parkingSpace = ModelDataObjectUtil.model2do(model, ParkingSpace.class);
 		parkingSpaceMapper.insertSelective(parkingSpace);
         model.setId(parkingSpace.getId());
+		String[] macList = model.getMacList();
+		if (macList != null){
+			for (String mac: macList){
+				Bluetooth bluetooth = new Bluetooth();
+				bluetooth.setSpaceId(parkingSpace.getId());
+				bluetooth.setMac(mac);
+				bluetoothMapper.insert(bluetooth);
+			}
+		}
 	}
 
 	@Override

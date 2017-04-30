@@ -29,4 +29,5 @@
 	<bean id="recordService" class="com.ucmed.common.service.record.RecordServiceImpl" />
 	<bean id="userService" class="com.ucmed.common.service.user.UserServiceImpl" />
 	<bean id="userSessionService" class="com.ucmed.common.service.user.UserSessionServiceImpl" />
+	<bean id="bluetoothService" class="com.ucmed.common.service.parking.BluetoothServiceImpl" />
 </beans>
