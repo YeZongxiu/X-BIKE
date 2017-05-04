@@ -117,6 +117,9 @@ public class ParkingSpaceModel {
         if (StringUtil.isNotBlank(this.fixNumber)){
             json.put("fix_quantity", this.fixNumber);
         }
+        if (this.parkNumber != null){
+            json.put("park_number", this.parkNumber);
+        }
         return  json;
     }
     

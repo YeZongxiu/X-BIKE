@@ -65,13 +65,13 @@ public class GetParkingBikeApi implements Api{
             }
             result.put("parking_list", array);
 		}
-        List<BikeModel> bikeModels = bikeService.getBikeInfo(Double.valueOf(longitude), Double.valueOf(latitude));
+        /*List<BikeModel> bikeModels = bikeService.getBikeInfo(Double.valueOf(longitude), Double.valueOf(latitude));
         if (null == bikeModels || bikeModels.isEmpty()) {
 			result.put("bike_list", new JSONArray());
 		} else {
 			result.put("bike_list", JSONArray.fromObject(bikeModels));
 		}
-        result.put("fix_bike_list", fixOrderService.getBikeFixList(Double.valueOf(longitude), Double.valueOf(latitude)));
+        result.put("fix_bike_list", fixOrderService.getBikeFixList(Double.valueOf(longitude), Double.valueOf(latitude)));*/
         result.put("ret_code", Constants.API_RESPONSE_RESULT_RET_CODE_SUCCESS);
         result.put("ret_info", "获取车辆站点信息成功");
         return result;
