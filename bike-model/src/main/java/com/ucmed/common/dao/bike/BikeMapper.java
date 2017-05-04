@@ -146,8 +146,8 @@ public interface BikeMapper {
 
 	@Select({
 			"select",
-			"id, bike_no, password, longitude, latitude, status, bike_type_id, park_id, is_delete",
-			"from bike", "where park_id = #{park_id,jdbcType=DECIMAL} and is_delete = 0" })
+			"bike.id, bike_no, password, longitude, latitude, status, bike_type_id, park_id, is_delete, bike_type_name",
+			"from bike, bike_type", "where park_id = #{park_id,jdbcType=DECIMAL} and is_delete = 0 and bike_type.id = bike.bike_type_id" })
 	@Results({
 			@Result(column = "id", property = "id", jdbcType = JdbcType.DECIMAL, id = true),
 			@Result(column = "bike_no", property = "bikeNo", jdbcType = JdbcType.VARCHAR),
@@ -157,6 +157,7 @@ public interface BikeMapper {
 			@Result(column = "status", property = "status", jdbcType = JdbcType.CHAR),
 			@Result(column = "bike_type_id", property = "bikeTypeId", jdbcType = JdbcType.INTEGER),
 			@Result(column = "park_id", property = "parkId", jdbcType = JdbcType.DECIMAL),
+			@Result(column = "bike_type_name", property="bikeTypeName", jdbcType=JdbcType.VARCHAR),
 			@Result(column = "is_delete", property = "isDelete", jdbcType = JdbcType.CHAR) })
 	List<Bike> getBikesByPark(Long park_id);
 
