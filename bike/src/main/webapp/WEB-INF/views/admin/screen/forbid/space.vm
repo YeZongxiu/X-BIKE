@@ -29,7 +29,7 @@
         map.centerAndZoom(new BMap.Point($!result.longitude,$!result.latitude), 15);
         #foreach($forbid in $result.cannotParking_list)
             var p$count = new BMap.Point($forbid.longitude,$forbid.latitude);
-            var circle$count = new BMap.Circle(p$count,$forbid.radius * 1000,{strokeColor:"blue", strokeWeight:2, strokeOpacity:0.5}); //创建圆
+            var circle$count = new BMap.Circle(p$count,$forbid.radius,{strokeColor:"blue", strokeWeight:2, strokeOpacity:0.5}); //创建圆
             map.addOverlay(circle$count);
             var marker$count = new BMap.Marker(p$count,{icon:myIcon});
             var marker = marker$count;

@@ -7,11 +7,14 @@ import org.apache.http.HttpResponse;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.util.EntityUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Created by wzyk88 on 2017/4/8.
  */
 public class GetDistanceUtil {
+    private static final Logger LOG = LoggerFactory.getLogger(GetDistanceUtil.class);
     public static JSONArray getPoint(JSONArray array, Double longitude, Double latitude, JSONArray list){
         Long distance = 0l;
         Integer pointIndex = 0;
@@ -104,4 +107,62 @@ public class GetDistanceUtil {
         }
         return null;
     }
+
+    public static void tranToBaiDu(JSONObject result, String listName){
+        JSONArray array = result.optJSONArray(listName);
+        JSONArray newArray = new JSONArray();
+        for (Object object : array) {
+            JSONObject obj = JSONObject.fromObject(object);
+            getGPSFromGaoDe(obj);
+            newArray.add(obj);
+        }
+        result.put(listName, newArray);
+    }
+
+    public static void getGPSFromGaoDe(JSONObject object){
+        String body;
+        DefaultHttpClient httpclient = new DefaultHttpClient();
+        String url = "http://api.map.baidu.com/geoconv/v1/?coords=" + object.optString("longitude") + "," + object.optString("latitude") + "&from=3&ak=" + Constants.BAIDUAK;
+        try {
+            HttpGet httpget = new HttpGet(url);
+            HttpResponse response = httpclient.execute(httpget);
+            HttpEntity entity = response.getEntity();
+            body = EntityUtils.toString(entity);
+            JSONObject baidu = JSONObject.fromObject(body);
+            if (0 == object.optInt("status")){
+                JSONArray result = baidu.optJSONArray("result");
+                if (result != null && !result.isEmpty()){
+                    object.put("longitude", JSONObject.fromObject(result.opt(0)).optString("x"));
+                    object.put("latitude", JSONObject.fromObject(result.opt(0)).optString("y"));
+                }
+            }
+        } catch (Exception e){
+
+        }finally {
+            httpclient.getConnectionManager().shutdown();
+        }
+    }
+
+    public static void toGaoDe(JSONObject object){
+        String body;
+        DefaultHttpClient httpclient = new DefaultHttpClient();
+        String url = "http://restapi.amap.com/v3/assistant/coordinate/convert?locations=" + object.optString("longitude") + "," + object.optString("latitude") + "&coordsys=baidu&output=JSON&key=" + Constants.GAODE;
+        try {
+            HttpGet httpget = new HttpGet(url);
+            HttpResponse response = httpclient.execute(httpget);
+            HttpEntity entity = response.getEntity();
+            body = EntityUtils.toString(entity);
+            JSONObject gaode = JSONObject.fromObject(body);
+            if ("1".equals(gaode.optString("status"))){
+                String[] locations = gaode.optString("locations").split(",");
+                object.put("longitude", locations[0]);
+                object.put("latitude", locations[1]);
+            }
+        } catch (Exception e){
+            LOG.info(e.getMessage());
+        }finally {
+            httpclient.getConnectionManager().shutdown();
+        }
+    }
+
 }

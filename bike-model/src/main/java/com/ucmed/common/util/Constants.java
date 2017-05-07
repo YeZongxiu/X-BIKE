@@ -41,6 +41,7 @@ public class Constants {
     public static final String HZ_LATITUDE = "30.280059";
 
     public static final String BAIDUAK = "nry1ogpPPBHyTnftGh5mng8fbsCmV7v2";
+    public static final String GAODE = "e13f39ba40b0ad8d65ce632cd6cab885";
 
     //微信公众号信息
     public static final String APP_ID = "wx19290816dd5f9de9";

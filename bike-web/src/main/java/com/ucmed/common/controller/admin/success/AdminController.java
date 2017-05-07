@@ -1,6 +1,7 @@
 package com.ucmed.common.controller.admin.success;
 
 import com.ucmed.common.net.XBIKE;
+import com.ucmed.common.util.GetDistanceUtil;
 import com.ucmed.common.util.ResultUtil;
 import net.sf.json.JSONObject;
 import org.springframework.stereotype.Controller;
@@ -22,6 +23,7 @@ public class AdminController {
         JSONObject params = new JSONObject();
         String session_id = (String) request.getSession().getAttribute("session_id");
         result = XBIKE.getInstance().requestActionParams(apiName, params, session_id).optJSONObject("return_params");
+        GetDistanceUtil.tranToBaiDu(result, "parking_list");
         map.put("result", result);
         return "admin/screen/parking/info";
     }
@@ -33,6 +35,7 @@ public class AdminController {
         JSONObject params = new JSONObject();
         String session_id = (String) request.getSession().getAttribute("session_id");
         result = XBIKE.getInstance().requestActionParams(apiName, params, session_id).optJSONObject("return_params");
+        GetDistanceUtil.tranToBaiDu(result, "cannotParking_list");
         map.put("result", result);
         return "admin/screen/forbid/space";
     }
@@ -48,6 +51,7 @@ public class AdminController {
         params.put("radius", request.getParameter("radius"));
         params.put("start_time", request.getParameter("start_time").replace("T", " "));
         params.put("end_time", request.getParameter("end_time").replace("T", " "));
+        GetDistanceUtil.toGaoDe(params);
         String session_id = (String) request.getSession().getAttribute("session_id");
         result = XBIKE.getInstance().requestActionParams(apiName, params, session_id).optJSONObject("return_params");
         ResultUtil.writeResult(response, result.toString());
@@ -62,6 +66,7 @@ public class AdminController {
         params.put("longitude", request.getParameter("longitude"));
         params.put("latitude", request.getParameter("latitude"));
         params.put("number", request.getParameter("number"));
+        GetDistanceUtil.toGaoDe(params);
         String session_id = (String) request.getSession().getAttribute("session_id");
         result = XBIKE.getInstance().requestActionParams(apiName, params, session_id).optJSONObject("return_params");
         ResultUtil.writeResult(response, result.toString());
