@@ -37,6 +37,7 @@
 	<bean id="bikeMacValidateApi" class="com.ucmed.common.api.bike.MacValidateApi" />
 	<bean id="adminForbidSpaceApi" class="com.ucmed.common.api.admin.AdminGetForbidSpaceApi" />
 	<bean id="adminEditForbidApi" class="com.ucmed.common.api.admin.AdminEditForbidSpaceApi" />
+	<bean id="adminDeleteForbidApi" class="com.ucmed.common.api.admin.AdminDeleteForbidApi" />
 
 	<bean id="apiFactory" class="com.ucmed.common.api.ApiFactoryImpl">
 		<property name="map">
@@ -68,6 +69,7 @@
 				<entry key="api.bike.mac.validate" value-ref="bikeMacValidateApi"/>
 				<entry key="api.bike.admin.forbid.space" value-ref="adminForbidSpaceApi"/>
 				<entry key="api.bike.admin.edit.forbid" value-ref="adminEditForbidApi"/>
+				<entry key="api.bike.admin.delete.forbid" value-ref="adminDeleteForbidApi"/>
 			</map>
 		</property>
 	</bean>

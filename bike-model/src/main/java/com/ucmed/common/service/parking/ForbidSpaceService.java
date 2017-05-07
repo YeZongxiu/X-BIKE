@@ -17,4 +17,6 @@ public interface ForbidSpaceService {
     public ForbidSpaceModel getForbidById(Long id);
 
     public List<ForbidSpaceModel> getForbid(Double longitude, Double latitude);
+
+    public void deleteById(Long id);
 }

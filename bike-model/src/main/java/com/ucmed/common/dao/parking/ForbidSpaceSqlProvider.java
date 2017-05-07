@@ -48,6 +48,10 @@ public class ForbidSpaceSqlProvider {
         if (record.getEndTime() != null) {
             VALUES("end_time", "#{endTime,jdbcType=TIMESTAMP}");
         }
+
+        if (record.getMessage() != null) {
+            VALUES("message", "#{message,jdbcType=VARCHAR}");
+        }
         
         return SQL();
     }
@@ -83,7 +87,11 @@ public class ForbidSpaceSqlProvider {
         if (record.getEndTime() != null) {
             SET("end_time = #{endTime,jdbcType=TIMESTAMP}");
         }
-        
+
+        if (record.getMessage() != null) {
+            SET("message = #{message,jdbcType=VARCHAR}");
+        }
+
         WHERE("id = #{id,jdbcType=INTEGER}");
         
         return SQL();

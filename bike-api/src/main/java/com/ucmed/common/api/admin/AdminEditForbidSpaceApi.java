@@ -60,6 +60,7 @@ public class AdminEditForbidSpaceApi implements Api{
         model.setStartTime(start_time);
         model.setEndTime(end_time);
         model.setDistance(Double.parseDouble(params.optString("radius")));
+        model.setMessage(params.optString("message"));
         if (StringUtil.isNotBlank(id)){
             model.setId(Integer.parseInt(id));
             ForbidSpaceModel old = forbidSpaceService.getForbidById(Long.parseLong(id));

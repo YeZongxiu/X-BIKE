@@ -57,6 +57,7 @@
                 <value>api.admin.get.fix.list</value>
                 <value>api.bike.admin.forbid.space</value>
                 <value>api.bike.admin.edit.forbid</value>
+                <value>api.bike.admin.delete.forbid</value>
             </list>
         </property>
     </bean>

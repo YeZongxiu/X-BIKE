@@ -48,7 +48,8 @@ public class AdminGetForbidSpaceApi implements Api{
             return errorResult(result, "您不是管理员，不能查看全部禁停信息。", "错误：不是管理员，无法查看全部禁停信息");
         }
         List<ForbidSpaceModel> forbidSpaceModels = forbidSpaceService.getForbidSpaceList();
-        JSONObject center = GetDistanceUtil.getByIp();
+        //JSONObject center = GetDistanceUtil.getByIp();
+        JSONObject center = null;
         Double longitude;
         Double latitude;
         if (center == null) {

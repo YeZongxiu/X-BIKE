@@ -3,6 +3,9 @@ package com.ucmed.common.api.bike;
 import java.util.Date;
 import java.util.List;
 
+import com.ucmed.common.model.parking.ForbidSpaceModel;
+import com.ucmed.common.service.parking.ForbidSpaceService;
+import com.ucmed.common.util.GetDistanceUtil;
 import net.sf.json.JSONObject;
 
 import org.slf4j.Logger;
@@ -26,8 +29,13 @@ public class ReturnUseBikeApi implements Api{
 	private BikeService bikeService;
 	private RecordService recordService;
 	private ParkingSpaceService parkingSpaceService;
-	
-	public void setUserService(UserService userService) {
+    private ForbidSpaceService forbidSpaceService;
+
+    public void setForbidSpaceService(ForbidSpaceService forbidSpaceService) {
+        this.forbidSpaceService = forbidSpaceService;
+    }
+
+    public void setUserService(UserService userService) {
 		this.userService = userService;
 	}
 
@@ -67,11 +75,20 @@ public class ReturnUseBikeApi implements Api{
         if (null == bikeModel) {
         	return errorResult(result, "对不起，此车非本系统车辆。", "错误：数据库中未匹配到这辆车");
 		}
+        List<ForbidSpaceModel> forbidSpaceModels = forbidSpaceService.getForbid(Double.parseDouble(longitude), Double.parseDouble(latitude));
+        if (forbidSpaceModels != null && !forbidSpaceModels.isEmpty()){
+            for (ForbidSpaceModel forbidSpace: forbidSpaceModels) {
+                Double distance = GetDistanceUtil.getDistanceByGPS(Double.parseDouble(longitude), Double.parseDouble(latitude), Double.parseDouble(forbidSpace.getLongitude()), Double.parseDouble(forbidSpace.getLatitude()));
+                if (distance <= forbidSpace.getDistance()){
+                    return errorResult(result, forbidSpace.getMessage(), "错误：车辆在禁停区域");
+                }
+            }
+        }
         Date endDate = new Date();
         Date startDate = record.getStartTime();
         Long between = endDate.getTime() - startDate.getTime();
         Long hour = between / (60 * 60 * 1000);
-        if ((hour * 60) < (between/(60 * 1000))){
+        if ((hour * 60) <= (between/(60 * 1000))){
             hour = hour + 1;
         }
         Integer cost = 0;

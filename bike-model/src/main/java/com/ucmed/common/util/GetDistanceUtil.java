@@ -15,6 +15,24 @@ import org.slf4j.LoggerFactory;
  */
 public class GetDistanceUtil {
     private static final Logger LOG = LoggerFactory.getLogger(GetDistanceUtil.class);
+
+    private static Double rad(Double d){
+        return  d * Math.PI / 180.0;
+    }
+
+    public static Double getDistanceByGPS(Double longitude, Double latitude, Double log, Double lati){
+        Double radLat1 = rad(latitude);
+        Double radLat2 = rad(lati);
+        Double a = radLat1 - radLat2;
+        Double b = rad(longitude - log);
+        Double d;
+        Double sa2, sb2;
+        sa2 = Math.sin(a / 2.0);
+        sb2 = Math.sin(b / 2.0);
+        d = 2 * Constants.R * Math.asin(Math.sqrt(sa2 * sa2 + Math.cos(latitude) * Math.cos(lati) * sb2 * sb2));
+        return d;
+    }
+
     public static JSONArray getPoint(JSONArray array, Double longitude, Double latitude, JSONArray list){
         Long distance = 0l;
         Integer pointIndex = 0;

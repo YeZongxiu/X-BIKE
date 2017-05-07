@@ -23,6 +23,16 @@ public class ForbidSpaceModel {
 
     private Date endTime;
 
+    private String message;
+
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
+    }
+
     public Integer getId() {
         return id;
     }
@@ -104,8 +114,11 @@ public class ForbidSpaceModel {
         if (StringUtil.isNotBlank(this.endTime)){
             json.put("end_time", DateUtil.dateToString1(this.endTime));
         }
-        if (StringUtil.isNotBlank(this.distance)){
+        if (this.distance != null){
             json.put("radius", this.distance);
+        }
+        if (StringUtil.isNotBlank(this.message)){
+            json.put("message", this.message);
         }
         return  json;
     }

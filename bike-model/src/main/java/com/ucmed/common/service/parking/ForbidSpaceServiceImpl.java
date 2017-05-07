@@ -44,7 +44,8 @@ public class ForbidSpaceServiceImpl implements ForbidSpaceService {
     @Override
     public List<ForbidSpaceModel> getForbidSpaceList() {
         Date now = new Date();
-        JSONObject center = GetDistanceUtil.getByIp();
+        //JSONObject center = GetDistanceUtil.getByIp();
+        JSONObject center = null;
         Double longitude;
         Double latitude;
         if (center == null) {
@@ -130,5 +131,10 @@ public class ForbidSpaceServiceImpl implements ForbidSpaceService {
             models.add(model);
         }
         return models;
+    }
+
+    @Override
+    public void deleteById(Long id) {
+        forbidSpaceMapper.deleteByPrimaryKey(id);
     }
 }

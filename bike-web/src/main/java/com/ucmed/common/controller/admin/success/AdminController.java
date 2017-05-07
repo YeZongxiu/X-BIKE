@@ -51,6 +51,7 @@ public class AdminController {
         params.put("radius", request.getParameter("radius"));
         params.put("start_time", request.getParameter("start_time").replace("T", " "));
         params.put("end_time", request.getParameter("end_time").replace("T", " "));
+        params.put("message", request.getParameter("message"));
         GetDistanceUtil.toGaoDe(params);
         String session_id = (String) request.getSession().getAttribute("session_id");
         result = XBIKE.getInstance().requestActionParams(apiName, params, session_id).optJSONObject("return_params");
@@ -58,7 +59,7 @@ public class AdminController {
     }
 
     @RequestMapping(method = RequestMethod.POST, value = "addParkInfo.htm")
-    public void addParkInfo(HttpServletRequest request, ModelMap map, HttpServletResponse response) throws IOException  {
+    public void addParkInfo(HttpServletRequest request, ModelMap map, HttpServletResponse response) throws IOException {
         JSONObject result = new JSONObject();
         String apiName = "api.bike.add.parking";
         JSONObject params = new JSONObject();
@@ -68,6 +69,17 @@ public class AdminController {
         params.put("number", request.getParameter("number"));
         GetDistanceUtil.toGaoDe(params);
         String session_id = (String) request.getSession().getAttribute("session_id");
+        result = XBIKE.getInstance().requestActionParams(apiName, params, session_id).optJSONObject("return_params");
+        ResultUtil.writeResult(response, result.toString());
+    }
+
+    @RequestMapping(method = RequestMethod.POST, value = "deleteForbid.htm")
+    public void deleteForbid(HttpServletRequest request, ModelMap map, HttpServletResponse response) throws IOException {
+        JSONObject result = new JSONObject();
+        String apiName = "api.bike.admin.delete.forbid";
+        JSONObject params = new JSONObject();
+        String session_id = (String) request.getSession().getAttribute("session_id");
+        params.put("id", request.getParameter("id"));
         result = XBIKE.getInstance().requestActionParams(apiName, params, session_id).optJSONObject("return_params");
         ResultUtil.writeResult(response, result.toString());
     }

@@ -33,66 +33,96 @@
             map.addOverlay(circle$count);
             var marker$count = new BMap.Marker(p$count,{icon:myIcon});
             var marker = marker$count;
-            var startTime = convertDateFromString('$forbid.start_time');
-            var endTime = convertDateFromString('$forbid.end_time');
+            var startTime = convertDateFromString('$!forbid.start_time');
+            var endTime = convertDateFromString('$!forbid.end_time');
             marker.addEventListener("click", function(){
-                $.confirm({
-                    title: '禁停信息',
+                $.modal({
+                    title: "禁停信息",
                     text: "<form>"
-                    + "<div>范 &nbsp; 围：<input type='text' class='weui-input weui-prompt-input' value='$forbid.radius' id='distance'></div>"
+                    + "<div>范围(米)：<input type='text' class='weui-input weui-prompt-input' value='$!forbid.radius' id='distance'></div>"
                     + "<div>开始时间：<input class='weui-input' type='datetime-local' value='"+ startTime +"' id='start_time'></div>"
                     + "<div>结束时间：<input class='weui-input' type='datetime-local' value='"+ endTime +"' id='end_time'></div>"
+                    + "<div style='text-align: left;'>提 &nbsp; 示：<textarea style='border: 1px solid #ccc;' class='weui-textarea' id='message' rows='3' placeholder='请输入提示语'>$!forbid.message</textarea></div>"
                     + "<div id='msg' style='color: red; display:none;font-size: 12px;text-align: left;margin-top: 10px;'></div>"
                     + "</form>",
-                    onOK: function () {
-                        var id = '$forbid.id';
-                        var distance = $("#distance").val().trim();
-                        var start_time = $("#start_time").val();
-                        var end_time = $("#end_time").val();
-                        if (id == null){
-                            $("#msg").html("修改禁停信息错误，请刷新页面后再次修改！");
-                            $("#msg").show();
-                            return;
-                        }
-                        if (distance == null || distance == ''){
-                            $("#msg").html("修改禁停信息错误，未输入范围！");
-                            $("#msg").show();
-                            return;
-                        }
-                        if (start_time == null || start_time == ''){
-                            $("#msg").html("修改禁停信息错误，未输入开始时间！");
-                            $("#msg").show();
-                            return;
-                        }
-                        if (end_time == null || end_time == ''){
-                            $("#msg").html("修改禁停信息错误，未输入结束时间！");
-                            $("#msg").show();
-                            return;
-                        }
-                        $.ajax({
-                            type: "POST",
-                            url:"/admin/editForbid.htm",
-                            data: {
-                                id: id,
-                                radius: distance,
-                                start_time: start_time,
-                                end_time: end_time
-                            },
-                            success: function(data){
-                                var obj = eval("(" + data + ")");
-                                var retCode = obj.ret_code;
-                                var retInfor = obj.ret_info;
-                                if (retCode == 0) {
-                                    gotoUrl("/admin/getForbid.htm");
-                                } else {
-                                    alert(retInfor);
-                                }
+                    buttons: [
+                        { text: "确定", onClick: function(){
+                            var id = '$forbid.id';
+                            var distance = $("#distance").val().trim();
+                            var start_time = $("#start_time").val();
+                            var end_time = $("#end_time").val();
+                            var message = $("#message").val().trim();
+                            if (id == null){
+                                $("#msg").html("修改禁停信息错误，请刷新页面后再次修改！");
+                                $("#msg").show();
+                                return;
                             }
-                        })
-                    },
-                    onCancel: function () {
-                        $.closeModal();
-                    }
+                            if (distance == null || distance == ''){
+                                $("#msg").html("修改禁停信息错误，未输入范围！");
+                                $("#msg").show();
+                                return;
+                            }
+                            if (start_time == null || start_time == ''){
+                                $("#msg").html("修改禁停信息错误，未输入开始时间！");
+                                $("#msg").show();
+                                return;
+                            }
+                            if (end_time == null || end_time == ''){
+                                $("#msg").html("修改禁停信息错误，未输入结束时间！");
+                                $("#msg").show();
+                                return;
+                            }
+                            if (message == null || message == ''){
+                                $("#msg").html("修改禁停信息错误，未输入提示语！");
+                                $("#msg").show();
+                                return;
+                            }
+                            $.ajax({
+                                type: "POST",
+                                url:"/admin/editForbid.htm",
+                                data: {
+                                    id: id,
+                                    radius: distance,
+                                    start_time: start_time,
+                                    end_time: end_time,
+                                    message: message
+                                },
+                                success: function(data){
+                                    var obj = eval("(" + data + ")");
+                                    var retCode = obj.ret_code;
+                                    var retInfor = obj.ret_info;
+                                    if (retCode == 0) {
+                                        gotoUrl("/admin/getForbid.htm");
+                                    } else {
+                                        alert(retInfor);
+                                    }
+                                }
+                            })
+                        } },
+                        { text: "取消", onClick: function(){
+                            $.closeModal();
+                        } },
+                        { text: "删除", onClick: function(){
+                            var id = '$forbid.id';
+                            $.ajax({
+                                type: "POST",
+                                url:"/admin/deleteForbid.htm",
+                                data: {
+                                    id: id
+                                },
+                                success: function(data){
+                                    var obj = eval("(" + data + ")");
+                                    var retCode = obj.ret_code;
+                                    var retInfor = obj.ret_info;
+                                    if (retCode == 0) {
+                                        gotoUrl("/admin/getForbid.htm");
+                                    } else {
+                                        alert(retInfor);
+                                    }
+                                }
+                            })
+                        } },
+                    ]
                 });
             });
         map.addOverlay(marker$count);
@@ -111,15 +141,17 @@
                     + "<div style='text-align: left;'>地 &nbsp; 址："+ rs.address +"</div>"
                     + "<div style='text-align: left;'>经 &nbsp; 度："+ pt.lng +"</div>"
                     + "<div style='text-align: left;'>纬 &nbsp; 度："+ pt.lat +"</div>"
-                    + "<div>范 &nbsp; 围：<input type='text' class='weui-input weui-prompt-input' id='distance'></div>"
+                    + "<div>范围(米)：<input type='text' class='weui-input weui-prompt-input' id='distance'></div>"
                     + "<div>开始时间：<input class='weui-input' type='datetime-local' id='start_time'></div>"
                     + "<div>结束时间：<input class='weui-input' type='datetime-local' id='end_time'></div>"
+                    + "<div style='text-align: left;'>提 &nbsp; 示：<textarea style='border: 1px solid #ccc;' class='weui-textarea' id='message' rows='3' placeholder='请输入提示语'></textarea></div>"
                     + "<div id='msg' style='color: red; display:none;font-size: 12px;text-align: left;margin-top: 10px;'></div>"
                     + "</form>",
                     onOK: function () {
                         var distance = $("#distance").val().trim();
                         var start_time = $("#start_time").val();
                         var end_time = $("#end_time").val();
+                        var message = $("#message").val().trim();
                         if (pt.lng == null || pt.lng == '' || pt.lat == null || pt.lat == ''){
                             $("#msg").html("增加禁停信息错误，经纬度为空！");
                             $("#msg").show();
@@ -140,6 +172,11 @@
                             $("#msg").show();
                             return;
                         }
+                        if (message == null || message == ''){
+                            $("#msg").html("增加禁停信息错误，未输入提示语！");
+                            $("#msg").show();
+                            return;
+                        }
                         $.ajax({
                             type: "POST",
                             url:"/admin/editForbid.htm",
@@ -148,7 +185,8 @@
                                 latitude: pt.lat,
                                 radius: distance,
                                 start_time: start_time,
-                                end_time: end_time
+                                end_time: end_time,
+                                message: message
                             },
                             success: function(data){
                                 var obj = eval("(" + data + ")");

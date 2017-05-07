@@ -11,19 +11,20 @@ import java.util.List;
 public interface ForbidSpaceMapper {
     @Delete({
         "delete from forbid_space",
-        "where id = #{id,jdbcType=INTEGER}"
+        "where id = #{id,jdbcType=DECIMAL}"
     })
-    int deleteByPrimaryKey(Integer id);
+    int deleteByPrimaryKey(Long id);
 
     @Insert({
         "insert into forbid_space (id, longitude, ",
         "latitude, distance, ",
         "create_time, update_time, ",
-        "start_time, end_time)",
+        "start_time, end_time, message)",
         "values (#{id,jdbcType=INTEGER}, #{longitude,jdbcType=VARCHAR}, ",
         "#{latitude,jdbcType=VARCHAR}, #{distance,jdbcType=DOUBLE}, ",
         "#{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, ",
-        "#{startTime,jdbcType=TIMESTAMP}, #{endTime,jdbcType=TIMESTAMP})"
+        "#{startTime,jdbcType=TIMESTAMP}, #{endTime,jdbcType=TIMESTAMP}, ",
+        "#{message,jdbcType=VARCHAR})"
     })
     int insert(ForbidSpace record);
 
@@ -32,7 +33,7 @@ public interface ForbidSpaceMapper {
 
     @Select({
         "select",
-        "id, longitude, latitude, distance, create_time, update_time, start_time, end_time",
+        "id, longitude, latitude, distance, create_time, update_time, start_time, end_time, message",
         "from forbid_space",
         "where id = #{id,jdbcType=DECIMAL}"
     })
@@ -44,7 +45,8 @@ public interface ForbidSpaceMapper {
         @Result(column="create_time", property="createTime", jdbcType=JdbcType.TIMESTAMP),
         @Result(column="update_time", property="updateTime", jdbcType=JdbcType.TIMESTAMP),
         @Result(column="start_time", property="startTime", jdbcType=JdbcType.TIMESTAMP),
-        @Result(column="end_time", property="endTime", jdbcType=JdbcType.TIMESTAMP)
+        @Result(column="end_time", property="endTime", jdbcType=JdbcType.TIMESTAMP),
+        @Result(column="message", property="message", jdbcType=JdbcType.VARCHAR)
     })
     ForbidSpace selectByPrimaryKey(Long id);
 
@@ -59,14 +61,15 @@ public interface ForbidSpaceMapper {
           "create_time = #{createTime,jdbcType=TIMESTAMP},",
           "update_time = #{updateTime,jdbcType=TIMESTAMP},",
           "start_time = #{startTime,jdbcType=TIMESTAMP},",
-          "end_time = #{endTime,jdbcType=TIMESTAMP}",
+          "end_time = #{endTime,jdbcType=TIMESTAMP},",
+          "message = #{message,jdbcType=VARCHAR}",
         "where id = #{id,jdbcType=INTEGER}"
     })
     int updateByPrimaryKey(ForbidSpace record);
 
     @Select({
             "select",
-            "id, longitude, latitude, distance, start_time, end_time",
+            "id, longitude, latitude, distance, start_time, end_time, message",
             "from forbid_space",
             "where (longitude+0) >= #{minlng,jdbcType=DECIMAL}",
             "and (longitude+0) <= #{maxlng,jdbcType=DECIMAL}",
@@ -80,7 +83,8 @@ public interface ForbidSpaceMapper {
             @Result(column="latitude", property="latitude", jdbcType=JdbcType.VARCHAR),
             @Result(column="distance", property="distance", jdbcType=JdbcType.DOUBLE),
             @Result(column="start_time", property="startTime", jdbcType=JdbcType.TIMESTAMP),
-            @Result(column="end_time", property="endTime", jdbcType=JdbcType.TIMESTAMP)
+            @Result(column="end_time", property="endTime", jdbcType=JdbcType.TIMESTAMP),
+            @Result(column="message", property="message", jdbcType=JdbcType.VARCHAR)
     })
     List<ForbidSpace> selectForbidSpace(@Param("minlng") Double minlng,
                                     @Param("maxlng") Double maxlng, @Param("minlat") Double minlat,
@@ -88,7 +92,7 @@ public interface ForbidSpaceMapper {
 
     @Select({
             "select",
-            "id, longitude, latitude, distance, start_time, end_time",
+            "id, longitude, latitude, distance, start_time, end_time, message",
             "from forbid_space",
             "where (longitude+0) >= #{minlng,jdbcType=DECIMAL}",
             "and (longitude+0) <= #{maxlng,jdbcType=DECIMAL}",
@@ -101,7 +105,8 @@ public interface ForbidSpaceMapper {
             @Result(column="id", property="id", jdbcType=JdbcType.DECIMAL, id=true),
             @Result(column="longitude", property="longitude", jdbcType=JdbcType.VARCHAR),
             @Result(column="latitude", property="latitude", jdbcType=JdbcType.VARCHAR),
-            @Result(column="distance", property="distance", jdbcType=JdbcType.DOUBLE)
+            @Result(column="distance", property="distance", jdbcType=JdbcType.DOUBLE),
+            @Result(column="message", property="message", jdbcType=JdbcType.VARCHAR)
     })
     List<ForbidSpace> getForbid(@Param("minlng") Double minlng,
                                         @Param("maxlng") Double maxlng, @Param("minlat") Double minlat,
