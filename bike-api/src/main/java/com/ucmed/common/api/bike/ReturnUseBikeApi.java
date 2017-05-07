@@ -74,7 +74,11 @@ public class ReturnUseBikeApi implements Api{
         if ((hour * 60) < (between/(60 * 1000))){
             hour = hour + 1;
         }
-        Integer cost = Integer.valueOf(hour.toString());
+        Integer cost = 0;
+        String isBluetooth = params.optString("is_bluetooth");
+        if (null == isBluetooth || "0".equals(isBluetooth) ){
+            cost = Integer.valueOf(hour.toString());
+        }
         record.setCost(cost);
         record.setEndTime(endDate);
         recordService.updateRecord(record);

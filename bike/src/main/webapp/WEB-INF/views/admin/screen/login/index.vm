@@ -68,7 +68,6 @@
                 } else {
                     alert(retInfor);
                 }
-
             },
             error : function() {
 

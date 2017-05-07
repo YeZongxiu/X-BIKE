@@ -82,4 +82,26 @@ public class GetDistanceUtil {
         }
         return new JSONObject();
     }
+
+    public static JSONObject getByIp(){
+        String body;
+        DefaultHttpClient httpclient = new DefaultHttpClient();
+        String url = "http://api.map.baidu.com/location/ip?" + "&ak=" + Constants.BAIDUAK + "&coor=bd09ll";
+        try {
+            HttpGet httpget = new HttpGet(url);
+            HttpResponse response = httpclient.execute(httpget);
+            HttpEntity entity = response.getEntity();
+            body = EntityUtils.toString(entity);
+            JSONObject object = JSONObject.fromObject(body);
+            if (0 == object.optInt("status")){
+                JSONObject result = object.optJSONObject("content").optJSONObject("point");
+                return result;
+            }
+        } catch (Exception e){
+
+        }finally {
+            httpclient.getConnectionManager().shutdown();
+        }
+        return null;
+    }
 }

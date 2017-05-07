@@ -29,16 +29,21 @@
                     <div class="menu_section">
                         <h3>General</h3>
                         <ul class="nav side-menu">
+                            <li><a><i class="fa fa-home"></i> 停车点设置 <span class="fa fa-chevron-down"></span></a>
+                                <ul class="nav child_menu">
+                                    <li onclick="gotoUrl('/admin/getForbid.htm')">设置禁停区域</li>
+                                </ul>
+                            </li>
                             <li><a><i class="fa fa-table"></i> 车辆维修情况 <span class="fa fa-chevron-down"></span></a>
                                 <ul class="nav child_menu">
                                     <li onclick="gotoUrl('/admin/getFixList.htm')">维修记录</li>
                                 </ul>
                             </li>
-                            <li><a><i class="fa fa-bar-chart-o"></i> 数据统计 <span
+                            #*<li><a><i class="fa fa-bar-chart-o"></i> 数据统计 <span
                                     class="fa fa-chevron-down"></span></a>
                                 <ul class="nav child_menu">
                                 </ul>
-                            </li>
+                            </li>*#
                         </ul>
                     </div>
 

@@ -1,11 +1,13 @@
 <style type="text/css">
     body, html,#allmap {width: 100%;height: 100%;overflow: hidden;margin:0;font-family:"微软雅黑";}
+    input {width: 70% !important;}
 </style>
 <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=nry1ogpPPBHyTnftGh5mng8fbsCmV7v2"></script>
 <script src="/admin/js/jquery.min.js"></script>
 <link rel="stylesheet" href="/admin/css/weui.min.css">
 <link rel="stylesheet" href="/admin/css/jquery-weui.css">
 <script src="/admin/js/jquery-weui.js"></script>
+<script src="/admin/js/common.js"></script>
 <body>
 <div id="allmap"></div>
 </body>
@@ -14,6 +16,7 @@
     // 百度地图API功能
     var map = new BMap.Map("allmap");
     var myIcon = new BMap.Icon("/admin/images/park.png", new BMap.Size(21,29));
+    var geoc = new BMap.Geocoder();
     #if($!result.ret_code == 1)
         alert('$result.ret_info');
         map.centerAndZoom("杭州", 15);
@@ -24,9 +27,16 @@
             var marker$count = new BMap.Marker(p$count,{icon:myIcon});
             var marker = marker$count;
             marker.addEventListener("click", function(){
-                $.alert({
-                    title: '车辆信息',
-                    text: '<div>停车数量：$park.quantity </div><div>站点内维修车辆数量：$park.fix_quantity </div>'
+                var address;
+                geoc.getLocation(p$count, function(rs){
+                    address = rs.address;
+                    $.alert({
+                        title: '车辆信息',
+                        text: '<div>停车数量：$park.quantity </div><div>站点内维修车辆数量：$park.fix_quantity </div><div>地址：'+ address +' </div>',
+                        onOK: function () {
+                            $.closeModal();
+                        }
+                    });
                 });
             });
             map.addOverlay(marker$count);
@@ -35,4 +45,47 @@
     #end
     map.centerAndZoom(p0, 15);
     map.enableScrollWheelZoom(true);     //开启鼠标滚轮缩放
+    function addForbid(e){
+        if(!e.overlay){
+            var pt = e.point;
+            geoc.getLocation(pt, function(rs){
+                $.confirm({
+                    title: '禁停信息',
+                    text: "<form>"
+                    + "<div style='text-align: left;'>地 &nbsp; 址："+ rs.address +"</div>"
+                    + "<div style='text-align: left;'>经 &nbsp; 度："+ pt.lng +"</div>"
+                    + "<div style='text-align: left;'>纬 &nbsp; 度："+ pt.lat +"</div>"
+                    + "<div>最大停车：<input class='weui-input weui-prompt-input' type='text' id='number'></div>"
+                    + "<div id='msg' style='color: red; display:none;font-size: 12px;text-align: left;margin-top: 10px;'></div>"
+                    + "</form>",
+                    onOK: function () {
+                        var number = $("#number").val();
+                        $.ajax({
+                            type: "POST",
+                            url:"/admin/addParkInfo.htm",
+                            data: {
+                                longitude: pt.lng,
+                                latitude: pt.lat,
+                                number: number
+                            },
+                            success: function(data){
+                                var obj = eval("(" + data + ")");
+                                var retCode = obj.ret_code;
+                                var retInfor = obj.ret_info;
+                                if (retCode == 0) {
+                                    gotoUrl("/admin/getParkInfo.htm");
+                                } else {
+                                    alert(retInfor);
+                                }
+                            }
+                        })
+                    },
+                    onCancel: function () {
+                        $.closeModal();
+                    }
+                });
+            });
+        }
+    }
+    map.addEventListener("click", addForbid);
 </script>

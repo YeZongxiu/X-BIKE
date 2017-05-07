@@ -1,0 +1,173 @@
+<style type="text/css">
+    body, html,#allmap {width: 100%;height: 100%;overflow: hidden;margin:0;font-family:"微软雅黑";}
+    input {width: 70% !important;}
+</style>
+<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=nry1ogpPPBHyTnftGh5mng8fbsCmV7v2"></script>
+<script src="/admin/js/jquery.min.js"></script>
+<link rel="stylesheet" href="/admin/css/weui.min.css">
+<link rel="stylesheet" href="/admin/css/jquery-weui.css">
+<script src="/admin/js/jquery-weui.js"></script>
+<script src="/admin/js/common.js"></script>
+<body>
+<div id="allmap"></div>
+</body>
+</html>
+<script type="text/javascript">
+    function convertDateFromString(dateString) {
+        if (dateString) {
+            return dateString.replace(" ", "T");
+        }
+    }
+    // 百度地图API功能
+    var map = new BMap.Map("allmap");
+    var myIcon = new BMap.Icon("/admin/images/park.png", new BMap.Size(21,29));
+    #set($count = 0)
+    #if($!result.ret_code == 1)
+        alert('$result.ret_info');
+        map.centerAndZoom("杭州", 15);
+    #else
+        map.centerAndZoom(new BMap.Point($!result.longitude,$!result.latitude), 15);
+        #foreach($forbid in $result.cannotParking_list)
+            var p$count = new BMap.Point($forbid.longitude,$forbid.latitude);
+            var circle$count = new BMap.Circle(p$count,$forbid.radius * 1000,{strokeColor:"blue", strokeWeight:2, strokeOpacity:0.5}); //创建圆
+            map.addOverlay(circle$count);
+            var marker$count = new BMap.Marker(p$count,{icon:myIcon});
+            var marker = marker$count;
+            var startTime = convertDateFromString('$forbid.start_time');
+            var endTime = convertDateFromString('$forbid.end_time');
+            marker.addEventListener("click", function(){
+                $.confirm({
+                    title: '禁停信息',
+                    text: "<form>"
+                    + "<div>范 &nbsp; 围：<input type='text' class='weui-input weui-prompt-input' value='$forbid.radius' id='distance'></div>"
+                    + "<div>开始时间：<input class='weui-input' type='datetime-local' value='"+ startTime +"' id='start_time'></div>"
+                    + "<div>结束时间：<input class='weui-input' type='datetime-local' value='"+ endTime +"' id='end_time'></div>"
+                    + "<div id='msg' style='color: red; display:none;font-size: 12px;text-align: left;margin-top: 10px;'></div>"
+                    + "</form>",
+                    onOK: function () {
+                        var id = '$forbid.id';
+                        var distance = $("#distance").val().trim();
+                        var start_time = $("#start_time").val();
+                        var end_time = $("#end_time").val();
+                        if (id == null){
+                            $("#msg").html("修改禁停信息错误，请刷新页面后再次修改！");
+                            $("#msg").show();
+                            return;
+                        }
+                        if (distance == null || distance == ''){
+                            $("#msg").html("修改禁停信息错误，未输入范围！");
+                            $("#msg").show();
+                            return;
+                        }
+                        if (start_time == null || start_time == ''){
+                            $("#msg").html("修改禁停信息错误，未输入开始时间！");
+                            $("#msg").show();
+                            return;
+                        }
+                        if (end_time == null || end_time == ''){
+                            $("#msg").html("修改禁停信息错误，未输入结束时间！");
+                            $("#msg").show();
+                            return;
+                        }
+                        $.ajax({
+                            type: "POST",
+                            url:"/admin/editForbid.htm",
+                            data: {
+                                id: id,
+                                radius: distance,
+                                start_time: start_time,
+                                end_time: end_time
+                            },
+                            success: function(data){
+                                var obj = eval("(" + data + ")");
+                                var retCode = obj.ret_code;
+                                var retInfor = obj.ret_info;
+                                if (retCode == 0) {
+                                    gotoUrl("/admin/getForbid.htm");
+                                } else {
+                                    alert(retInfor);
+                                }
+                            }
+                        })
+                    },
+                    onCancel: function () {
+                        $.closeModal();
+                    }
+                });
+            });
+        map.addOverlay(marker$count);
+        #set($count = $count + 1)
+        #end
+    #end
+    map.enableScrollWheelZoom(true);     //开启鼠标滚轮缩放
+    var geoc = new BMap.Geocoder();
+    function addForbid(e){
+        if(!e.overlay){
+            var pt = e.point;
+            geoc.getLocation(pt, function(rs){
+                $.confirm({
+                    title: '禁停信息',
+                    text: "<form>"
+                    + "<div style='text-align: left;'>地 &nbsp; 址："+ rs.address +"</div>"
+                    + "<div style='text-align: left;'>经 &nbsp; 度："+ pt.lng +"</div>"
+                    + "<div style='text-align: left;'>纬 &nbsp; 度："+ pt.lat +"</div>"
+                    + "<div>范 &nbsp; 围：<input type='text' class='weui-input weui-prompt-input' id='distance'></div>"
+                    + "<div>开始时间：<input class='weui-input' type='datetime-local' id='start_time'></div>"
+                    + "<div>结束时间：<input class='weui-input' type='datetime-local' id='end_time'></div>"
+                    + "<div id='msg' style='color: red; display:none;font-size: 12px;text-align: left;margin-top: 10px;'></div>"
+                    + "</form>",
+                    onOK: function () {
+                        var distance = $("#distance").val().trim();
+                        var start_time = $("#start_time").val();
+                        var end_time = $("#end_time").val();
+                        if (pt.lng == null || pt.lng == '' || pt.lat == null || pt.lat == ''){
+                            $("#msg").html("增加禁停信息错误，经纬度为空！");
+                            $("#msg").show();
+                            return;
+                        }
+                        if (distance == null || distance == ''){
+                            $("#msg").html("增加禁停信息错误，未输入范围！");
+                            $("#msg").show();
+                            return;
+                        }
+                        if (start_time == null || start_time == ''){
+                            $("#msg").html("增加禁停信息错误，未输入开始时间！");
+                            $("#msg").show();
+                            return;
+                        }
+                        if (end_time == null || end_time == ''){
+                            $("#msg").html("增加禁停信息错误，未输入结束时间！");
+                            $("#msg").show();
+                            return;
+                        }
+                        $.ajax({
+                            type: "POST",
+                            url:"/admin/editForbid.htm",
+                            data: {
+                                longitude: pt.lng,
+                                latitude: pt.lat,
+                                radius: distance,
+                                start_time: start_time,
+                                end_time: end_time
+                            },
+                            success: function(data){
+                                var obj = eval("(" + data + ")");
+                                var retCode = obj.ret_code;
+                                var retInfor = obj.ret_info;
+                                if (retCode == 0) {
+                                    gotoUrl("/admin/getForbid.htm");
+                                } else {
+                                    alert(retInfor);
+                                }
+                            }
+                        })
+                    },
+                    onCancel: function () {
+                        $.closeModal();
+                    }
+                });
+            });
+        }
+    }
+    map.addEventListener("click", addForbid);
+</script>

@@ -2,7 +2,9 @@ package com.ucmed.common.api.bike;
 
 import java.util.List;
 
+import com.ucmed.common.model.parking.ForbidSpaceModel;
 import com.ucmed.common.service.fix.FixOrderService;
+import com.ucmed.common.service.parking.ForbidSpaceService;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 
@@ -21,6 +23,7 @@ public class GetParkingBikeApi implements Api{
 	private BikeService bikeService;
 	private ParkingSpaceService parkingSpaceService;
     private FixOrderService fixOrderService;
+    private ForbidSpaceService forbidSpaceService;
 
     public void setFixOrderService(FixOrderService fixOrderService) {
         this.fixOrderService = fixOrderService;
@@ -34,7 +37,11 @@ public class GetParkingBikeApi implements Api{
 		this.parkingSpaceService = parkingSpaceService;
 	}
 
-	@Override
+    public void setForbidSpaceService(ForbidSpaceService forbidSpaceService) {
+        this.forbidSpaceService = forbidSpaceService;
+    }
+
+    @Override
 	public JSONObject execute(JSONObject params) {
 		JSONObject result = new JSONObject();
         if (params == null || params.isEmpty()){
@@ -65,6 +72,17 @@ public class GetParkingBikeApi implements Api{
             }
             result.put("parking_list", array);
 		}
+        List<ForbidSpaceModel> forbidSpaceModels = forbidSpaceService.getForbid(Double.valueOf(longitude), Double.valueOf(latitude));
+        if (null == forbidSpaceModels || forbidSpaceModels.isEmpty()) {
+            result.put("cannotParking_list", new JSONArray());
+        } else {
+            JSONArray array = new JSONArray();
+            for (ForbidSpaceModel forbidSpaceModel : forbidSpaceModels) {
+                JSONObject obj = forbidSpaceModel.getJsonObject();
+                array.add(obj);
+            }
+            result.put("cannotParking_list", array);
+        }
         /*List<BikeModel> bikeModels = bikeService.getBikeInfo(Double.valueOf(longitude), Double.valueOf(latitude));
         if (null == bikeModels || bikeModels.isEmpty()) {
 			result.put("bike_list", new JSONArray());

@@ -55,6 +55,8 @@
                 <value>api.bike.user.scan.info</value>
                 <value>api.bike.admin.get.park</value>
                 <value>api.admin.get.fix.list</value>
+                <value>api.bike.admin.forbid.space</value>
+                <value>api.bike.admin.edit.forbid</value>
             </list>
         </property>
     </bean>

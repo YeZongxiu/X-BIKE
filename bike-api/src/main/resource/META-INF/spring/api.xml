@@ -35,7 +35,9 @@
 	<bean id="adminGetParkInfoApi" class="com.ucmed.common.api.admin.AdminGetParkInfoApi" />
 	<bean id="getFixOrderListApi" class="com.ucmed.common.api.fix.GetFixOrderListApi" />
 	<bean id="bikeMacValidateApi" class="com.ucmed.common.api.bike.MacValidateApi" />
-	
+	<bean id="adminForbidSpaceApi" class="com.ucmed.common.api.admin.AdminGetForbidSpaceApi" />
+	<bean id="adminEditForbidApi" class="com.ucmed.common.api.admin.AdminEditForbidSpaceApi" />
+
 	<bean id="apiFactory" class="com.ucmed.common.api.ApiFactoryImpl">
 		<property name="map">
 			<map>
@@ -64,6 +66,8 @@
 				<entry key="api.bike.admin.get.park" value-ref="adminGetParkInfoApi"/>
 				<entry key="api.admin.get.fix.list" value-ref="getFixOrderListApi"/>
 				<entry key="api.bike.mac.validate" value-ref="bikeMacValidateApi"/>
+				<entry key="api.bike.admin.forbid.space" value-ref="adminForbidSpaceApi"/>
+				<entry key="api.bike.admin.edit.forbid" value-ref="adminEditForbidApi"/>
 			</map>
 		</property>
 	</bean>

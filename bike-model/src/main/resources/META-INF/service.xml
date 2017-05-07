@@ -30,4 +30,5 @@
 	<bean id="userService" class="com.ucmed.common.service.user.UserServiceImpl" />
 	<bean id="userSessionService" class="com.ucmed.common.service.user.UserSessionServiceImpl" />
 	<bean id="bluetoothService" class="com.ucmed.common.service.parking.BluetoothServiceImpl" />
+	<bean id="forbidSpaceService" class="com.ucmed.common.service.parking.ForbidSpaceServiceImpl" />
 </beans>
