@@ -27,4 +27,23 @@ public class BluetoothServiceImpl implements BluetoothService {
 		}
 		return model;
 	}
+
+	@Override
+	public void addBluetooth(BluetoothModel model) {
+		Bluetooth bluetooth = ModelDataObjectUtil.model2do(model, Bluetooth.class);
+		bluetoothMapper.insertSelective(bluetooth);
+		model.setId(bluetooth.getId());
+	}
+
+	@Override
+	public BluetoothModel getBluetoothByNo(String no) {
+		BluetoothModel model = null;
+		Bluetooth bluetooth;
+		if (StringUtil.isNotBlank(no)){
+			bluetooth = bluetoothMapper.getBluetoothByNo(no);
+			if (bluetooth != null)
+				model =  ModelDataObjectUtil.model2do(bluetooth, BluetoothModel.class);
+		}
+		return model;
+	}
 }

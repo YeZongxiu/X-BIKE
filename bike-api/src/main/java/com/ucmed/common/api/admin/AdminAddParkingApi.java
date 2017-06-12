@@ -5,6 +5,7 @@ import com.ucmed.common.model.bike.BikeModel;
 import com.ucmed.common.model.parking.ParkingSpaceModel;
 import com.ucmed.common.model.user.UserModel;
 import com.ucmed.common.service.bike.BikeService;
+import com.ucmed.common.service.parking.BluetoothService;
 import com.ucmed.common.service.parking.ParkingSpaceService;
 import com.ucmed.common.service.user.UserService;
 import com.ucmed.common.util.Constants;
@@ -24,6 +25,7 @@ public class AdminAddParkingApi implements Api {
     private UserService userService;
     private BikeService bikeService;
     private ParkingSpaceService parkingSpaceService;
+    private BluetoothService bluetoothService;
 
     public void setUserService(UserService userService) {
         this.userService = userService;
@@ -36,6 +38,10 @@ public class AdminAddParkingApi implements Api {
     public void setParkingSpaceService(ParkingSpaceService parkingSpaceService) {
 		this.parkingSpaceService = parkingSpaceService;
 	}
+
+    public void setBluetoothService(BluetoothService bluetoothService) {
+        this.bluetoothService = bluetoothService;
+    }
 
 	@Override
     public JSONObject execute(JSONObject params) {
@@ -55,6 +61,7 @@ public class AdminAddParkingApi implements Api {
         String latitude = params.optString("latitude");
         //如果没有传入停车数量，则默认为10
         Integer number = params.optInt("number", 10);
+        String noList = params.optString("bluetooth_list");
         if (null == longitude || null == latitude){
             return errorResult(result, "位置信息错误。", "经纬度为空");
         }

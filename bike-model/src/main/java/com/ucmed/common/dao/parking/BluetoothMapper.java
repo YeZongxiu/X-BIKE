@@ -58,4 +58,17 @@ public interface BluetoothMapper {
             @Result(column="mac", property="mac", jdbcType=JdbcType.VARCHAR)
     })
     Bluetooth selectByMac(String mac);
+
+    @Select({
+            "select",
+            "id, space_id, mac",
+            "from bluetooth",
+            "where bluetooth_no = #{no,jdbcType=VARCHAR}"
+    })
+    @Results({
+            @Result(column="id", property="id", jdbcType=JdbcType.DECIMAL, id=true),
+            @Result(column="space_id", property="spaceId", jdbcType=JdbcType.DECIMAL),
+            @Result(column="mac", property="mac", jdbcType=JdbcType.VARCHAR)
+    })
+    Bluetooth getBluetoothByNo(String no);
 }

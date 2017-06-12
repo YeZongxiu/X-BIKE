@@ -23,7 +23,11 @@ public class BluetoothSqlProvider {
         if (record.getMac() != null) {
             VALUES("mac", "#{mac,jdbcType=VARCHAR}");
         }
-        
+
+        if (record.getBluetoothNo() != null) {
+            VALUES("bluetooth_no", "#{bluetoothNo,jdbcType=VARCHAR}");
+        }
+
         return SQL();
     }
 

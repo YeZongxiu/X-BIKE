@@ -35,13 +35,12 @@ public class MacValidateApi implements Api{
         }
         String mac = params.optString("mac");
         BluetoothModel model = bluetoothService.getBluetoothByMac(mac);
-        String isMac = "0";
-        if (model != null){
-            isMac = "1";
+        if (model != null) {
+            return errorResult(result, "失败，非本系统蓝牙。", "错误：非本系统蓝牙");
+        } else {
+            result.put("ret_code", Constants.API_RESPONSE_RESULT_RET_CODE_SUCCESS);
+            result.put("ret_info", "蓝牙验证完成");
         }
-        result.put("is_mac", isMac);
-        result.put("ret_code", Constants.API_RESPONSE_RESULT_RET_CODE_SUCCESS);
-        result.put("ret_info", "蓝牙验证完成");
         return result;
 	}
 	
