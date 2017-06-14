@@ -1,7 +1,9 @@
 package com.ucmed.common.api.admin;
 
 import com.ucmed.common.api.web.Api;
+import com.ucmed.common.dataobj.parking.Bluetooth;
 import com.ucmed.common.model.bike.BikeModel;
+import com.ucmed.common.model.parking.BluetoothModel;
 import com.ucmed.common.model.parking.ParkingSpaceModel;
 import com.ucmed.common.model.user.UserModel;
 import com.ucmed.common.service.bike.BikeService;
@@ -11,6 +13,7 @@ import com.ucmed.common.service.user.UserService;
 import com.ucmed.common.util.Constants;
 import com.ucmed.common.util.StringUtil;
 import net.sf.json.JSONObject;
+import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -62,12 +65,22 @@ public class AdminAddParkingApi implements Api {
         //如果没有传入停车数量，则默认为10
         Integer number = params.optInt("number", 10);
         String noList = params.optString("bluetooth_list");
+        String[] list = null;
         if (null == longitude || null == latitude){
             return errorResult(result, "位置信息错误。", "经纬度为空");
         }
         ParkingSpaceModel oldParkingSpace = parkingSpaceService.getSameParking(longitude, latitude);
         if (null != oldParkingSpace){
             return errorResult(result, "站点信息已存在。", "错误：站点信息已存在");
+        }
+        if (StringUtils.isNotEmpty(noList)){
+            list = noList.split(",");
+            for (String str: list) {
+                BluetoothModel model = bluetoothService.getBluetoothByNo(str);
+                if (null == model){
+                    return errorResult(result, "蓝牙编号不存在。", "错误：蓝牙不存在");
+                }
+            }
         }
         Integer count = 0;
         List<BikeModel> bikeModels = new ArrayList<>();
@@ -79,12 +92,7 @@ public class AdminAddParkingApi implements Api {
         } catch (Exception e) {
 			return errorResult(result, "坐标输入错误", "坐标错误");
 		}
-        String macList = params.optString("mac_list");
-        String[] macs = null;
-        if (StringUtil.isNotBlank(macList)){
-            macs = macList.split(",");
-        }
-        ParkingSpaceModel model = addBikeInfo(count, latitude, longitude, number, macs);
+        ParkingSpaceModel model = addBikeInfo(count, latitude, longitude, number, list);
         if (null != bikeModels && !bikeModels.isEmpty()){
             for (BikeModel bikeModel : bikeModels) {
                 bikeModel.setParkId(model.getId());

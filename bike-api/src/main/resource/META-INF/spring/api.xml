@@ -38,6 +38,8 @@
 	<bean id="adminForbidSpaceApi" class="com.ucmed.common.api.admin.AdminGetForbidSpaceApi" />
 	<bean id="adminEditForbidApi" class="com.ucmed.common.api.admin.AdminEditForbidSpaceApi" />
 	<bean id="adminDeleteForbidApi" class="com.ucmed.common.api.admin.AdminDeleteForbidApi" />
+	<bean id="adminAddBluetoothApi" class="com.ucmed.common.api.admin.AdminAddBluetoothApi" />
+	<bean id="adminGetAllBluetoothApi" class="com.ucmed.common.api.admin.AdminGetAllBluetoothApi" />
 
 	<bean id="apiFactory" class="com.ucmed.common.api.ApiFactoryImpl">
 		<property name="map">
@@ -70,6 +72,8 @@
 				<entry key="api.bike.admin.forbid.space" value-ref="adminForbidSpaceApi"/>
 				<entry key="api.bike.admin.edit.forbid" value-ref="adminEditForbidApi"/>
 				<entry key="api.bike.admin.delete.forbid" value-ref="adminDeleteForbidApi"/>
+				<entry key="api.bike.admin.add.bluetooth" value-ref="adminAddBluetoothApi"/>
+				<entry key="api.bike.admin.get.bluetooth" value-ref="adminGetAllBluetoothApi"/>
 			</map>
 		</property>
 	</bean>

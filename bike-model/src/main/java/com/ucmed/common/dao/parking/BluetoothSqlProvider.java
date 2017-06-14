@@ -47,4 +47,15 @@ public class BluetoothSqlProvider {
         
         return SQL();
     }
+
+    public String getBluetoothList(String type){
+        StringBuffer sb = new StringBuffer();
+        sb.append("select * from bluetooth");
+        if ("1".equals(type)){
+            sb.append("where space_id = null");
+        } else if ("2".equals(type)){
+            sb.append("where space_id != null");
+        }
+        return sb.toString();
+    }
 }

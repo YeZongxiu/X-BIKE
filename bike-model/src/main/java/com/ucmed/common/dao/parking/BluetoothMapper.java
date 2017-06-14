@@ -4,6 +4,8 @@ import com.ucmed.common.dataobj.parking.Bluetooth;
 import org.apache.ibatis.annotations.*;
 import org.apache.ibatis.type.JdbcType;
 
+import java.util.List;
+
 public interface BluetoothMapper {
     @Delete({
         "delete from bluetooth",
@@ -71,4 +73,13 @@ public interface BluetoothMapper {
             @Result(column="mac", property="mac", jdbcType=JdbcType.VARCHAR)
     })
     Bluetooth getBluetoothByNo(String no);
+
+    @InsertProvider(type=BluetoothSqlProvider.class, method="getBluetoothList")
+    @Results({
+            @Result(column="id", property="id", jdbcType=JdbcType.DECIMAL, id=true),
+            @Result(column="space_id", property="spaceId", jdbcType=JdbcType.DECIMAL),
+            @Result(column="mac", property="mac", jdbcType=JdbcType.VARCHAR),
+            @Result(column="bluetooth_no", property="bluetoothNo", jdbcType=JdbcType.VARCHAR)
+    })
+    List<Bluetooth> getBluetoothList(String type);
 }
