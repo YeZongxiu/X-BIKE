@@ -1,0 +1,362 @@
+body {
+    font-family: "microsoft yahei";
+}
+
+a:hover {
+    text-decoration: none;
+}
+
+.project_null {
+    font-size: 16px;
+    text-align: center;
+    color: #aaa;
+    background-color: #fdfdfd;
+    margin-top: -20px;
+    border: 1px solid #eee;
+    border-top: none;
+}
+
+.project_table {
+    overflow: auto;
+    height: 770px;
+}
+
+.version_box {
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin: 20px;
+    position: relative;
+    padding-top: 60px;
+    padding-bottom: 0;
+    height: 580px;
+}
+
+.well {
+    overflow: hidden;
+    width: 100%;
+    background: none;
+    border: none;
+    box-shadow: none;
+    padding: 20px 0;
+}
+
+.up_delete_btn {
+    margin-top: 20px;
+    overflow: hidden;
+}
+
+.up_delete_btn button {
+    font-family: "microsoft yahei";
+    font-size: 14px;
+    display: inline-block;
+    background-color: #7bca7b;
+    background-image: none;
+    border: none;
+    border-radius: 5px;
+    color: #fff;
+    width: 96px;
+    height: 34px;
+    text-align: center;
+    margin-right: 20px;
+    text-shadow: 1px 1px 1px #1e871e;
+}
+
+.up_delete_btn button, .up_delete_btn span {
+    float: left;
+}
+
+.up_delete_btn button:hover {
+    background-color: #34ad34;
+}
+
+.ae_input {
+    height: 34px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+}
+
+.text_right {
+    text-align: right;
+}
+
+.ae_title {
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: #fafafa;
+    width: 100%;
+    height: 44px;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    line-height: 44px;
+    font-size: 16px;
+    font-family: "microsoft yahei";
+    padding-left: 20px;
+    color: #646464;
+    border-bottom: 1px solid #ccc;
+    font-weight: bold;
+}
+
+.navbar-fixed-bottom {
+    position: absolute;
+}
+
+.up_load_icon {
+    display: inline-block;
+    width: 96px;
+    height: 34px;
+    overflow: hidden;
+    background-color: #7bca7b;
+    border-radius: 5px;
+    margin-right: 20px;
+    line-height: 32px;
+    text-align: center;
+    font-size: 14px;
+    color: #fff;
+    text-shadow: 1px 1px 1px #1e871e;
+    font-family: "microsoft yahei";
+    position: relative;
+}
+
+.up_load_icon input {
+    display: inline-block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 200px;
+    height: 100px;
+    padding: 60px;
+    cursor: pointer;
+}
+
+.up_load_icon:hover {
+    background-color: #34ad34;
+}
+
+/*.data{
+	border:1px solid #ccc!important;
+	background-color: #fff;
+}*/
+.success_btn {
+    margin-right: 30px;
+    text-align: right;
+}
+
+.btn_green {
+    display: inline-block;
+    background: none;
+    background-color: #25b100;
+    padding: auto 30px;
+    border: 0;
+    min-width: 90px;
+    font-size: 14px;
+}
+
+.input_sth {
+    display: inline-block;
+    vertical-align: middle;
+    width: 320px;
+    margin-right: 26px;
+    text-indent: 20px;
+}
+
+.project_top {
+    padding: 0;
+    font-size: 26px;
+    color: #333;
+    margin-bottom: 30px;
+}
+
+.project_top_icon {
+    display: inline-block;
+    vertical-align: middle;
+    width: 20px;
+    height: 26px;
+    background: url(../../images/ngimg/rubik-x-icon.png) no-repeat 0 0;
+    margin-top: -6px;
+}
+
+.mar_bot30 {
+    margin-bottom: 30px;
+}
+
+.pro_table {
+    text-align: center;
+    border-color: #e6e6e6;
+    /*border-collapse:separate;
+    border-radius: 2px;*/
+}
+
+.pro_table tr td {
+    border-top: 0;
+    border-bottom: 0;
+    border-color: #f0f0f0;
+}
+
+.pro_table tr:nth-child(even) {
+    background-color: #fafafa;
+}
+
+.tr_top_back {
+    background-color: #f5f5f5;
+}
+
+.tr_top_back th {
+    text-align: center;
+}
+
+.tr_top_back th a {
+    color: #5a5a5a;
+    font-weight: bold;
+}
+
+.btn_father {
+    background-color: transparent;
+    padding: 0 6px;
+    width: 60px;
+}
+
+.edit {
+    display: inline-block;
+    width: 24px;
+    height: 25px;
+    background: url(../../images/ngimg/rubik-x-icon.png) no-repeat -58px 0;
+}
+
+.off_shelf {
+    display: inline-block;
+    width: 22px;
+    height: 22px;
+    background: url(../../images/ngimg/rubik-x-icon.png) no-repeat -124px 0;
+}
+
+.look {
+    display: inline-block;
+    width: 22px;
+    height: 24px;
+    background: url(../../images/ngimg/rubik-x-icon.png) no-repeat -92px 0;
+}
+
+.project_table .table td {
+    border-bottom: none;
+}
+
+.search_father {
+    position: relative;
+}
+
+.search_icon {
+    display: inline-block;
+    width: 18px;
+    height: 20px;
+    background: url(../../images/ngimg/rubik-x-icon.png) no-repeat -30px 0;
+    position: absolute;
+    top: 8px;
+    left: 10px;
+}
+
+.name td {
+    border-top: 0
+}
+
+.breadcrumb {
+    font-size: 16px;
+}
+
+.h1_title {
+    font-size: 26px;
+}
+
+.h2_title {
+    font-size: 16px;
+    color: #a7a7a7;
+}
+
+.off_shelfed {
+    color: #f85454;
+    background-color: transparent;
+    font-size: 16px;
+}
+
+a:hover {
+    text-decoration: none;
+}
+
+.project_null {
+    font-size: 16px;
+    text-align: center;
+    color: #aaa;
+    background-color: #fdfdfd;
+    margin-top: -20px;
+    border: 1px solid #eee;
+    border-top: none;
+}
+
+.project_table {
+    overflow: auto;
+    height: 770px;
+}
+
+.login_box {
+    margin-top: 50px;
+}
+
+.login_box .login_title {
+    font-size: 26px;
+    text-align: center;
+    color: #888888;
+}
+
+.yes_lbtn {
+    text-align: center;
+}
+
+.yes_lbtn button {
+    width: 100%;
+    height: 40px;
+}
+
+body {
+    position: relative;
+    padding-bottom: 90px;
+}
+
+.footer {
+    position: absolute;
+    left: 100px;
+    bottom: 0;
+}
+
+.ebtn_box {
+    /*width:100%;*/
+    text-align: left;
+    margin-left: 180px;
+}
+
+.ebtn_box button {
+    margin: auto 10px;
+}
+
+.sys_table {
+    text-align: left;
+}
+
+.sys_table tr td:first-child {
+    width: 30%;
+}
+
+.form-group select {
+    border: #ccc solid 1px;
+    padding: 6px 8px;
+}
+
+.twoline {
+    width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+}

@@ -78,7 +78,7 @@ public class ReturnUseBikeApi implements Api{
         List<ForbidSpaceModel> forbidSpaceModels = forbidSpaceService.getForbid(Double.parseDouble(longitude), Double.parseDouble(latitude));
         if (forbidSpaceModels != null && !forbidSpaceModels.isEmpty()){
             for (ForbidSpaceModel forbidSpace: forbidSpaceModels) {
-                Double distance = GetDistanceUtil.getDistanceByGPS(Double.parseDouble(longitude), Double.parseDouble(latitude), Double.parseDouble(forbidSpace.getLongitude()), Double.parseDouble(forbidSpace.getLatitude()));
+                Double distance = GetDistanceUtil.getDistanceByGPS(Double.parseDouble(longitude), Double.parseDouble(latitude), Double.parseDouble(forbidSpace.getLongitude()), Double.parseDouble(forbidSpace.getLatitude())) * 1000;
                 if (distance <= forbidSpace.getDistance()){
                     return errorResult(result, forbidSpace.getMessage(), "错误：车辆在禁停区域");
                 }

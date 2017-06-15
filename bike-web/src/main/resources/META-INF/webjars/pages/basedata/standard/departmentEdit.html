@@ -1,0 +1,109 @@
+﻿<div class="container col-lg-12">
+    <div class="panel panel-default">
+        <div class="bootstrap-admin-panel-content">
+            <div class="page-header">
+                <h1>修改标准科室关联</h1>
+            </div>
+
+            <form class="form-horizontal" name="submitForm" novalidate>
+                <!-- id -->
+                <div class="form-group">
+                    <label class="col-lg-2 control-label">科室名称:</label>
+
+                    <div class="col-lg-8">
+                        <label class="control-label">{{standardDept.className}}</label>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-lg-2 control-label">标准科室类别:</label>
+
+                    <div class="col-lg-8">
+                        <label class="control-label">{{standardDept.classFatherName}}</label>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-lg-2 control-label">对应疾病:</label>
+
+                    <div class="col-lg-8">
+                        <label class="control-label">
+                            <a ng-repeat="disease in standardDept.diseases">
+                                <span ng-if="$index>0">、</span>{{disease.name}}
+                            </a>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-lg-2 control-label">医院科室:</label>
+
+                    <div class="col-lg-8">
+                        <label class="control-label">
+                            <span class="small left search_father">
+                                        <input class="form-control input_sth" ng-model="nameText.deptName"
+                                               placeholder="请输入医院科室名称">
+                                        <button type="button" class="btn btn-success btn_green">搜索</button>
+                                        <u class="search_icon"></u>
+                                </span>
+                        </label>
+                    </div>
+                </div>
+
+
+                <div class="form-group">
+                    <table class="table table-bordered bootstrap-admin-table-with-actions pro_table">
+                        <thead>
+                        <tr class="tr_top_back">
+                            <th style="width: 10%">序号</th>
+                            <th style="width: 10%"><a href="">选择</a></th>
+                            <th style="width: 10%"><a href="">医院科室</a></th>
+                            <th style="width: 70%"><a href="">科室介绍</a></th>
+                        </tr>
+                        </thead>
+                        <tbody class="name" ng-show="standardDepartmentModel.deptList.length>0">
+                        <tr ng-repeat="dept in standardDepartmentModel.deptList | filter:nameText">
+                            <td style="border-top:0;border-color:#f0f0f0;" ng-bind="$index+startIndex">1</td>
+                            <td style="border-top:0;border-color:#f0f0f0;">
+                                <input name="sourceDepeId" type="checkbox" ng-model="dept.checked"/>
+                            </td>
+                            <td style="border-top:0;border-color:#f0f0f0;">{{dept.deptName}}</td>
+                            <td style="border-top:0;border-color:#f0f0f0;">
+
+                            </td>
+
+                        </tr>
+                        </tbody>
+                    </table>
+                    <div class="panel-body project_null"
+                         ng-show="standardDepartmentModel.deptList.length<=0&&(!search||search=='')">
+                        <div class="no-data">
+                            请添加医院科室
+                        </div>
+                    </div>
+
+                    <div class="panel-body project_null"
+                         ng-show="standardDepartmentModel.deptList.length<=0&&(search)">
+                        <div class="no-data">
+                            暂无相关结果!
+                        </div>
+                    </div>
+                </div>
+
+                <div class="ebtn_box">
+                    <button class="btn btn-primary"
+                            ng-click="standardDepartmentModel.updateStandardDept(standardDept.classId)"
+                            ng-disabled="submitForm.$invalid">
+                        <i class="glyphicon glyphicon-edit"></i>确定
+                    </button>
+
+                    <a ui-sref="^">
+                        <button class="btn btn-primary">
+                            <i class="glyphicon glyphicon-remove-circle"></i> 取消
+                        </button>
+                    </a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

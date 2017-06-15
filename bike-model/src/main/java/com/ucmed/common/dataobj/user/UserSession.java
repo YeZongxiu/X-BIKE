@@ -17,6 +17,16 @@ public class UserSession {
 
     private String isDelete;
 
+    private String deviceType;
+
+    public String getDeviceType() {
+        return deviceType;
+    }
+
+    public void setDeviceType(String deviceType) {
+        this.deviceType = deviceType;
+    }
+
     public Long getId() {
         return id;
     }

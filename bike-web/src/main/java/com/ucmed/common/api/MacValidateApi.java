@@ -2,6 +2,7 @@ package com.ucmed.common.api;
 
 import com.ucmed.common.model.parking.BluetoothModel;
 import com.ucmed.common.service.parking.BluetoothService;
+import io.swagger.annotations.Api;
 import net.sf.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -18,13 +19,15 @@ import static org.springframework.util.MimeTypeUtils.APPLICATION_JSON_VALUE;
  */
 @Controller
 @RequestMapping(value = "/api", produces = {APPLICATION_JSON_VALUE})
+@Api(value = "/api", description = "the fileupload API")
+@javax.annotation.Generated(value = "class io.swagger.codegen.languages.SpringMVCServerCodegen", date = "2016-04-15T03:07:18.225Z")
 public class MacValidateApi {
     @Autowired
     private BluetoothService bluetoothService;
 
     @RequestMapping(method = RequestMethod.POST, produces = { "application/json" }, value = "/macvalidate")
-    @ResponseBody
-    public ResponseEntity<Boolean> validate(@RequestParam(value = "mac") String mac) {
+    public ResponseEntity<Boolean> validate(@RequestParam(value = "mac", required = true) String mac,
+                                            HttpServletRequest request) {
         BluetoothModel model = bluetoothService.getBluetoothByMac(mac);
         if (model != null){
             return new ResponseEntity<Boolean>(true, HttpStatus.OK);

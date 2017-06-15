@@ -4,18 +4,26 @@
        xmlns:mvc="http://www.springframework.org/schema/mvc" 
        xmlns:context="http://www.springframework.org/schema/context" 
        xmlns:p="http://www.springframework.org/schema/p"
+	   xmlns:aop="http://www.springframework.org/schema/aop"
        xsi:schemaLocation="
         http://www.springframework.org/schema/beans 
         http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
         http://www.springframework.org/schema/context 
         http://www.springframework.org/schema/context/spring-context-3.0.xsd
         http://www.springframework.org/schema/mvc
-        http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd">
+        http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd
+        http://www.springframework.org/schema/aop
+        http://www.springframework.org/schema/aop/spring-aop-3.2.xsd">
 
+	<mvc:annotation-driven />
 	<context:annotation-config />
     <context:component-scan base-package="com.ucmed.common.controller" />
     <context:component-scan base-package="com.ucmed.common.dao" />
 	<context:component-scan base-package="com.ucmed.common.api" />
+
+	<mvc:resources mapping="/webjars/**" location="classpath:/META-INF/resources/webjars/"/>
+
+	<context:property-placeholder location="classpath*:*.properties" />
 
 	<bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter" />
 
@@ -89,4 +97,16 @@
 
 
 	<bean class="com.ucmed.common.util.ApplicationContextUtil" />
+
+	<bean id="objectMapper" class="com.fasterxml.jackson.databind.ObjectMapper" />
+	<bean id="logPrintClass" class="com.ucmed.common.util.LogPrintClass" />
+	<aop:config proxy-target-class="true">
+		<aop:aspect ref="logPrintClass" order="1">
+			<!--第1个*表示返回值是任意的 第2个*是包下所有方法 ..是方法的参数是任意的-->
+			<aop:pointcut expression="execution(* com.ucmed.common.api..*.*(..))"
+						  id="logPrint" />
+			<!-- around 环绕增强，在方法执行前，执行后-->
+			<aop:around pointcut-ref="logPrint" method="logApi" />
+		</aop:aspect>
+	</aop:config>
 </beans>

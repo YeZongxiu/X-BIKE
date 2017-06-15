@@ -1,0 +1,290 @@
+* {
+	margin: 0;
+	padding: 0;
+	border: 0
+}
+
+body {
+	background: #fff;
+	width: 98%;
+	height: 670px;
+	margin:auto;
+	font-family: "microsoft yahei";
+}
+.usercont {
+	width: 95%;
+	margin:auto;
+	margin-top:0px!important;
+	padding-bottom:10px;
+	font-size: 14px;
+}
+.martop-20{
+	margin-top:-20px!important;
+}
+.co-head {
+	background: #EFF5F9;
+	color: #7f96a0;
+	font-size: 16px;
+	width: 100%;
+	height: 70px;
+	line-height: 70px;
+	padding-left: 20px;
+	font-weight: bold;
+}
+
+.usercont li {
+	list-style: none;
+	height: 40px;
+	width: 100%;
+	margin-top: 10px;
+	padding-left: 20px;
+}
+
+
+
+.usercont li .datatype {
+	color: #6a90a9;
+	display:inline;
+}
+
+.usercont li .left-label{float:left;display:inline;width:130px;text-align:center;height:40px;}
+.usercont li .tip {
+	color: #adaeae;
+	margin-left: 20px;
+}
+
+.usercont li .inputtext {
+	width: 220px;
+	height: 35px;
+	border: 1px solid #D1DBE2;
+	pading-left: 20px;
+	background: #f6fbfe
+}
+
+.usercont li div textarea {
+	border: 1px solid #D1DBE2;
+	width: 60%;
+	height: 80px;
+	font-size: 14px;
+	background: #f6fbfe
+}
+
+.usercont li .longer {
+	width: 330px;
+}
+
+.usercont li .longerarea {
+	width: 600px;
+}
+
+.usercont li .usertype {
+	width: 220px;
+	height: 35px;
+	border: 1px solid #D1DBE2;
+}
+
+.usercont li .savehosbut {
+	width: 220px;
+	height: 35px;
+	margin-left: 80px;
+}
+
+
+label{display:inline;}
+
+/* ��������   �ϳ��Ͽ���ʽ */
+.describe{height:90px!important}
+.describe textarea{overflow:hidden;resize:none;width:500px;font-size:14px}
+/* ͼƬ�ϴ���ť��ʽ */
+a:hover{ text-decoration: none;}
+.btn_addPic{
+    display: block ;
+    position: relative ;
+    width: 79px ;
+      height: 60px ;
+      overflow: hidden ;
+      border: 1px solid #EBEBEB;
+      background: none repeat scroll 0 0 #F3F3F3;
+      color: #999999 ;
+    cursor: pointer ;
+      text-align: center ;
+      background: url(../images/uppicimg.png) center;
+}
+
+
+.filePrew {
+    display: block ;
+      position: absolute ;
+    top: 0 ;
+      left: 0 ;
+    width: 79px;
+      height: 60px;
+    opacity: 0 ; /* ʵ�ֵĹؼ�� */
+      filter:alpha(opacity= 0); /* ����IE */
+      margin-left:10px;border:none;outline:none;
+      
+}
+
+
+/*2015/9/2 new*/
+.co-head{
+	background-color:#fff;
+	border-bottom:1px solid #e6e6e6;
+	font-weight:normal;
+	font-size:18px;
+	padding-left:0;
+	color:#333;
+}
+.contant-all{
+	background-color:#f5f5f5;
+	padding:44px 30px;
+}
+.table-title{
+	color:#333333;
+	font-size:26px;
+	margin:20px 0 0 0;
+}
+.usercont li .datatype{
+	color:#666666;
+	vertical-align: top;
+}
+.usercont li .inputtext{
+	width:320px;
+	height:36px;
+	border:1px solid #e0e0e0;
+	background: #fff;
+	border-radius:4px;
+	text-indent: 6px;
+}
+.usercont li .in-textarea{
+	padding:5px 0;
+	width:780px;
+	height:100px;
+	resize: none;
+	border-radius:4px;
+	text-indent: 6px;
+	border:1px solid #e0e0e0;
+	box-shadow: none;
+	font-size:14px;
+	margin-left:-4px;
+}
+.usercont li .savehosbut{
+	margin-left:0;
+	width:240px;
+	height:46px;
+	background-color:#2c88f1;
+	text-shadow: none;
+	font-size:16px;
+}
+.remind-icon{
+	display: inline-block;
+	vertical-align: middle;
+	width:18px;
+	height:18px;
+	background: url(../images/s-icon.png) no-repeat 0 0;
+	margin:-3px 6px 0 0;
+}
+.usercont li{
+	margin-top:0;
+	margin-bottom:25px;
+}
+/*new 2015.9.6*/
+.btn_addPic{
+	width:102px;
+	height:102px;
+	background:url(../images/s-icon.png) no-repeat 0 -58px;
+}
+.bc-btn{
+	margin-top:20px;
+}
+.usercont li div textarea{
+	resize: none;
+	background-color:#fff;
+	box-shadow: none;
+}
+.tx-img{
+	width:120px;
+	height:120px;
+	border:4px solid #bbdafe;
+	background:url(../images/s-icon.png) -110px -58px;
+}
+.up-load-btn{
+	width:120px;
+	height:36px;
+	font-size: 18px;
+	margin-top:20px;
+	border-radius: 6px;
+	background-color:#2c88f1;
+	color:#fff;
+}
+.three-list{
+	/*width:100%;*/
+	margin-top:15px;
+	margin:15px 20px;
+}
+.another-line{
+	font-size: 18px;
+	background-color: #e6e6e6;
+	height:40px;
+	line-height: 40px;
+	padding:0;
+	padding-left:20px;
+}
+.three-list label{
+	display: inline-block;
+	text-align: right;
+	vertical-align: top;
+	width:110px;
+}
+.three-list td{
+	/*padding-top:15px;
+	padding-bottom:15px;*/
+	padding:15px;
+}
+.t-input{
+	width:196px;
+	height:36px;
+	border:1px solid #e0e0e0;
+	border-radius: 6px;
+	text-indent: 6px;
+}
+.table-con{
+	padding:0;
+}
+.t-textarea{
+	padding:6px;
+	width:876px;
+	height:50px;
+	resize: none;
+	font-size: 14px;
+}
+.sex-chack{
+	display: inline-block;
+	vertical-align: middle;
+	overflow: hidden;
+	line-height: 30px;;
+	width:20px;
+	height:20px;
+	margin:0 6px 0 10px;
+	background:url(../images/s-icon.png) no-repeat -110px 0;
+}
+.sex-chack:active{
+	background:url(../images/s-icon.png) no-repeat -80px 0;
+}
+.se-width{
+	width:292px;
+	height:36px;
+}
+.width375{
+	width:375px;
+}
+.list-one .t-input{
+	width:300px;
+}
+.remind-text-2{
+	text-align: center;
+	line-height:77px;
+	color:#f1922c;
+	font-size:18px;
+}
+

@@ -1,0 +1,71 @@
+﻿<div class="container col-lg-12">
+    <div>
+        <div class="project_table">
+            <table class="table table-bordered bootstrap-admin-table-with-actions pro_table">
+                <thead>
+                <div ui-content-for="title">
+                    <div class="left bootstrap-admin-above-content-title mar_bot30">
+                        <span class="small left search_father">
+							<input class="form-control input_sth" ng-model="diseaseClass"
+                                   placeholder="请输入关键字">
+							<u class="search_icon"></u>
+                    </span>
+                    </div>
+
+
+                </div>
+                <tr class="tr_top_back">
+                    <th style="width: 10%">序号</th>
+                    <th style="width: 15%"><a href="">标准科室名称</a></th>
+                    <th style="width: 15%"><a href="">标准科室类别</a></th>
+                    <th style="width: 30%"><a href="">对应疾病</a></th>
+                    <th style="width: 20%"><a href="">已关联的医院科室</a></th>
+                    <th style="width: 10%"><a>操作</a></th>
+                </tr>
+                </thead>
+                <tbody class="name" ng-show="standardDepartmentModel.diseaseClasses.length>0">
+                <tr ng-repeat="diseaseClass in standardDepartmentModel.diseaseClasses | filter:diseaseClass">
+                    <td style="border-top:0;border-color:#f0f0f0;" ng-bind="$index+startIndex">1</td>
+                    <td style="border-top:0;border-color:#f0f0f0;">{{diseaseClass.className}}</td>
+                    <td style="border-top:0;border-color:#f0f0f0;">{{diseaseClass.classFatherName}}</td>
+
+                    <td style="border-top:0;border-color:#f0f0f0;">
+                        <div class="twoline">
+                            <a ng-repeat="disease in diseaseClass.diseases">
+                                <span ng-if="$index>0">、</span>{{disease.name}}
+                            </a>
+                        </div>
+                    </td>
+
+                    <td style="border-top:0;border-color:#f0f0f0;">
+                        <div class="twoline">
+                            <a ng-repeat="hosDept in diseaseClass.hospitalDepts">
+                                <span ng-if="$index>0">、</span>{{hosDept.deptName}}
+                            </a>
+                        </div>
+                    </td>
+
+                    <td style="border-top:0;border-color:#f0f0f0;" class="actions">
+                        <a ui-sref=".standardEdit({cid : diseaseClass.classId})" title="修改">
+                            <button class="btn btn-xs btn-group btn_father">
+                                <i class="edit"></i>
+                            </button>
+                        </a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+            <div class="panel-body project_null" ng-show="standardDepartmentModel.diseaseClasses.length<=0&&(!search||search=='')">
+                <div class="no-data">
+                    请添加标准科室
+                </div>
+            </div>
+
+            <div class="panel-body project_null" ng-show="standardDepartmentModel.diseaseClasses.length<=0&&(search)">
+                <div class="no-data">
+                    暂无相关结果!
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

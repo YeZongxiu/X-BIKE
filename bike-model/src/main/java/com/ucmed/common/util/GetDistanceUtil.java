@@ -7,8 +7,11 @@ import org.apache.http.HttpResponse;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.util.EntityUtils;
+import org.apache.log4j.chainsaw.Main;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import java.math.BigDecimal;
 
 /**
  * Created by wzyk88 on 2017/4/8.
@@ -173,8 +176,14 @@ public class GetDistanceUtil {
             JSONObject gaode = JSONObject.fromObject(body);
             if ("1".equals(gaode.optString("status"))){
                 String[] locations = gaode.optString("locations").split(",");
-                object.put("longitude", locations[0]);
-                object.put("latitude", locations[1]);
+                Double longitude = Double.parseDouble(locations[0]);
+                Double latitude = Double.parseDouble(locations[1]);
+                BigDecimal logiDecimal = new BigDecimal(longitude);
+                Double logi = logiDecimal.setScale(6, BigDecimal.ROUND_HALF_UP).doubleValue();
+                BigDecimal latiDecimal = new BigDecimal(latitude);
+                Double lati = latiDecimal.setScale(6, BigDecimal.ROUND_HALF_UP).doubleValue();
+                object.put("longitude", logi.toString());
+                object.put("latitude", lati.toString());
             }
         } catch (Exception e){
             LOG.info(e.getMessage());
@@ -182,5 +191,4 @@ public class GetDistanceUtil {
             httpclient.getConnectionManager().shutdown();
         }
     }
-
 }

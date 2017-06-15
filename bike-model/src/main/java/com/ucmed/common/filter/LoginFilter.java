@@ -53,16 +53,22 @@ public class LoginFilter extends AbsNamedApiExecFilter {
         if (result != null && result.optInt("ret_code") == Constants.API_RESPONSE_RESULT_RET_CODE_SUCCESS) {
         	String sessionId = SysUtil.getClientSessionId();
             Long userId = result.optLong("user_id");
+            String deviceType = jsonReq.optString("device_type");
+            String device = jsonReq.optString("device");
             UserSession userSession= userSessionMapper.getByUserId(userId);
             if(null != userSession){
             	userSession.setSessionId(sessionId);
             	userSession.setUpdateTime(new Date());
             	userSession.setIsDelete("0");
+                userSession.setDevice(device);
+                userSession.setDeviceType(deviceType);
                 userSessionMapper.updateByPrimaryKeySelective(userSession);
             }else {
             	userSession = new UserSession();
             	userSession.setUserId(userId);
             	userSession.setSessionId(sessionId);
+                userSession.setDevice(device);
+                userSession.setDeviceType(deviceType);
             	userSession.setCreateTime(new Date());
             	userSession.setUpdateTime(new Date());
             	userSessionMapper.insertSelective(userSession);
